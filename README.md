@@ -6,22 +6,22 @@ Too often, students spend money on brand-new items without realizing someone on 
 
 ## 🚀 Features  
 
-🎯 **Campus-Exclusive Listings**
+🎯 **Campus-Exclusive Listings** :
 Users can only browse and interact with listings from their own campus — creating a trusted and hyper-local experience.
 
-🔄 **Buy, Sell & Trade**
+🔄 **Buy, Sell & Trade** :
 Post items for sale or trade, browse what others have listed, and strike deals easily.
 
-🔐 **University Verification**
+🔐 **University Verification** :
 Every user must log in using a university-specific code or domain to keep the platform secure and student-only.
 
-📦 **Categorized Listings**
+📦 **Categorized Listings** :
 Everything is neatly categorized for quick discovery.
 
-💬 **In-App Chat**
+💬 **In-App Chat** :
 Communicate directly with sellers and buyers to negotiate and finalize trades.
 
-🌱 **Promoting Reusability**
+🌱 **Promoting Reusability** :
 Help reduce waste by giving pre-loved items a second life.
 
 ## 🛠️ Tech Stack  
