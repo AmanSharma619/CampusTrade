@@ -1,9 +1,9 @@
 "use client"
+import "./page.css"
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import {Glowbutton,Defbutton} from '@/components/Button'
-import "./page.css"
 import Card from '@/components/Card'
 import { Inter,Roboto } from 'next/font/google'
 const font_inter = Inter({

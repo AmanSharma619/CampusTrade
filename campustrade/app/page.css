@@ -26,3 +26,24 @@
   background: url(/wave-haikei.png) bottom;
   background-size: cover;
 }
+ @media (max-width: 480px){
+  .main{
+    padding: 10px;
+    background: contain;
+    justify-content: space-around;
+  }
+  .hero{
+    margin: 0px;
+    padding: 0px;
+  }
+  .hero h1{
+    text-align: center;
+    font-size: 100px;
+  }
+  .hero h2{
+    font-size: 40px;
+  }
+  .buttons{
+    flex-direction: column;
+  }
+ }
