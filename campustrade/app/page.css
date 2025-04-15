@@ -22,4 +22,7 @@
       background-position: 0% 50%;
     }
   }
-  
+.main{
+  background: url(/wave-haikei.png) bottom;
+  background-size: cover;
+}

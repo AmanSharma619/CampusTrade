@@ -1,10 +1,17 @@
 import React from 'react'
 import Image from 'next/image'
+import { Inter } from 'next/font/google'
+const font_inter = Inter({
+  variable: "--inter",
+  weight: ['300','400', '700'],
+  subsets: ["latin"],
+});
+
 const Navbar = () => {
   return (
     
 <>
-<nav className="bg-white dark:bg-background sticky z-20 top-0 start-0 border-b-2 border-gray-200 dark:border-gray-600">
+<nav className={` ${font_inter.className} bg-white dark:bg-background sticky z-20 top-0 start-0 border-b-2 border-gray-200 dark:border-gray-600`}>
   <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
   <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
       <span className="self-center text-2xl font-semibold whitespace-nowrap text-white">CampusTrade</span>

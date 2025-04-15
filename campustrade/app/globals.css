@@ -5,6 +5,7 @@
   --foreground: #7873f5;
   --color1: #4845ae;
   --color2: #1B1A55;
+
 }
 
 @theme inline {
@@ -12,8 +13,6 @@
   --color-foreground: var(--foreground);
   --color-color1: var(--color1);
   --color-color2: var(--color2);
- 
-
 }
 
 /* 
