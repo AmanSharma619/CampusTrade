@@ -1,6 +1,8 @@
+import "./Navbar.css"
 import React from 'react'
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
+import Link from "next/link"
 const font_inter = Inter({
   variable: "--inter",
   weight: ['300','400', '700'],
@@ -11,10 +13,13 @@ const Navbar = () => {
   return (
     
 <>
-<nav className={` ${font_inter.className} bg-white dark:bg-background sticky z-20 top-0 start-0 border-b-2 border-gray-200 dark:border-gray-600`}>
-  <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+<nav className={` ${font_inter.className} bg-white dark:bg-black sticky z-20 top-0 start-0 border-b-2 border-gray-700 dark:border-gray-600`}>
+  <div className="max-w-screen-xl flex items-center justify-between mx-auto p-4">
   <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
-      <span className="self-center text-2xl font-semibold whitespace-nowrap text-white">CampusTrade</span>
+  <span className="logo">
+    <Image src={"/logo.png"} width={50} height={50}/>
+  </span>
+      <span className="self-center text-2xl font-semibold whitespace-nowrap text-white title">CampusTrade</span>
   </a>
   <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
       <button type="button" className="text-white bg-foreground hover:bg-color1 duration-200 cursor-pointer focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-md px-4 py-2 text-center ">Login/Sign Up</button>
@@ -28,16 +33,16 @@ const Navbar = () => {
   <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
     <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-transparent  dark:border-gray-700 text-xl">
       <li>
-        <a href="#" className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent  dark:text-white dark:hover:bg-gray-700 dark:hover:text-foreground  md:dark:hover:bg-transparent dark:border-gray-700" aria-current="page">Home</a>
+        <Link href="/" className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent  dark:text-white dark:hover:bg-gray-700 dark:hover:text-foreground  md:dark:hover:bg-transparent dark:border-gray-700" aria-current="page">Home</Link>
       </li>
       <li>
-        <a href="#" className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent  dark:text-white dark:hover:bg-gray-700 dark:hover:text-foreground  md:dark:hover:bg-transparent dark:border-gray-700">Marketplace</a>
+        <Link href="#" className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent  dark:text-white dark:hover:bg-gray-700 dark:hover:text-foreground  md:dark:hover:bg-transparent dark:border-gray-700">Marketplace</Link>
       </li>
       <li>
-        <a href="#" className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent  dark:text-white dark:hover:bg-gray-700 dark:hover:text-foreground  md:dark:hover:bg-transparent dark:border-gray-700">My Chats</a>
+        <Link href="#" className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent  dark:text-white dark:hover:bg-gray-700 dark:hover:text-foreground  md:dark:hover:bg-transparent dark:border-gray-700">My Chats</Link>
       </li>
       <li>
-        <a href="#" className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent  dark:text-white dark:hover:bg-gray-700 dark:hover:text-foreground  md:dark:hover:bg-transparent dark:border-gray-700">About Me</a>
+        <Link href="#" className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent  dark:text-white dark:hover:bg-gray-700 dark:hover:text-foreground  md:dark:hover:bg-transparent dark:border-gray-700">About Me</Link>
       </li>
     </ul>
   </div>

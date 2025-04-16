@@ -23,14 +23,17 @@
     }
   }
 .main{
-  background: url(/wave-haikei.png) bottom;
+  background: url(/wave-haikei1.png) bottom;
   background-size: cover;
 }
- @media (max-width: 480px){
+ @media(min-width:390px) and (max-width: 480px){
+  body{
+    overflow-x: hidden;
+  }
   .main{
-    padding: 10px;
-    background: contain;
-    justify-content: space-around;
+    padding: 5px;
+    background-position: bottom left;
+    justify-content: space-evenly;
   }
   .hero{
     margin: 0px;
@@ -38,12 +41,33 @@
   }
   .hero h1{
     text-align: center;
-    font-size: 100px;
+    font-size: 93px;
   }
   .hero h2{
-    font-size: 40px;
+    font-size: 35px;
   }
   .buttons{
     flex-direction: column;
+  }
+ }
+ @media (max-width:390px) {
+  .main{
+    padding: 5px;
+    background: contain;
+    justify-content: space-evenly;
+  }
+  .hero{
+    margin: 0px;
+    padding: 0px;
+  }
+  .hero h1{
+    font-size: 85px;
+  }
+  .hero h2{
+    font-size: 25px;
+  }
+  .buttons{
+    flex-direction: column;
+    margin-bottom: 10px;
   }
  }
