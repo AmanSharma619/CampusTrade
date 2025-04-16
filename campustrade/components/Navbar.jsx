@@ -1,9 +1,9 @@
 import "./Navbar.css"
 import React from 'react'
 import Image from 'next/image'
-import { Inter } from 'next/font/google'
+import { Inter, Poppins } from 'next/font/google'
 import Link from "next/link"
-const font_inter = Inter({
+const font_inter = Poppins({
   variable: "--inter",
   weight: ['300','400', '700'],
   subsets: ["latin"],
