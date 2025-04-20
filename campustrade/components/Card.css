@@ -1,3 +1,15 @@
-.card{
-    box-shadow: 0px 10px 20px #4845ae;
-}
+@media(max-width: 480px){
+    .container{
+        flex-direction: column;
+        gap: 10px;
+        padding: 5px;
+    }
+    .card{
+        margin: auto;
+        min-height: 40vh;
+        min-width: 70vw;
+    }
+    .card-title{
+        font: 90px;
+    }
+   }
