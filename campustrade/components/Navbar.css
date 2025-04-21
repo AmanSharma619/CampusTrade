@@ -1,8 +1,22 @@
-@media (max-width:390px) {
-    button{
-        padding: 5px;
+@media (max-width:480px) {
+    .login{
+        padding: 3px;
+        font-size: 12px;
     }
     .title{
-        font-size: 21px;
+        font-size: 18px;
+    }
+    #logo{
+        height: 30px;
+        width: 30px;
     }
    }
+/* @media (max-width:480px) {
+    .title{
+        font-size: 18px;
+    }
+    #logo{
+        height: 30px;
+        width: 30px;
+    }
+   } */

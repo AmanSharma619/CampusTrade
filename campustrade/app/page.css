@@ -53,6 +53,9 @@
   .buttons{
     flex-direction: column;
   }
+  button{
+    font-size: 24px;
+  }
  }
  @media (max-width:390px) {
   .main{
@@ -77,5 +80,8 @@
   .buttons{
     flex-direction: column;
     margin-bottom: 10px;
+  }
+  button{
+    font-size: 19px;
   }
  }

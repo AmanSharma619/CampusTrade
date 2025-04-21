@@ -1,0 +1,13 @@
+@media(max-width: 480px){
+   .trademark{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+   }
+   .trademark span{
+    font-size: 19px;
+   }
+ul{
+    justify-content: center;
+}
+   }

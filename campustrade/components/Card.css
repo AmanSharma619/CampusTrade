@@ -13,3 +13,8 @@
         font: 90px;
     }
    }
+@media(max-width: 390px){
+   .card{
+    min-height: 50vh;
+   }
+   }
