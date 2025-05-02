@@ -11,8 +11,7 @@ import Script from "next/script"
 const home = () => {
   return (
     <>
-    <Script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.7/gsap.min.js" strategy="beforeInteractive"/>
-    <Script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.7/ScrollTrigger.min.js" strategy="beforeInteractive"/>
+    
     <div className='min-h-screen flex font-bold flex-col sticky top-0 gap-5 main '  >   
       <div className="hero w-full text-9xl mx-auto  text-white tracking-wide text-center min-h-4/5 flex flex-col gap-6 mt-14 p-9 ">
         <h1 className='text-color1 tracking-wider' id="head">Buy. Sell. Borrow. </h1>
