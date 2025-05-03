@@ -1,4 +1,5 @@
 "use client"
+import "./page.css"
 import React, { useState } from 'react'
 import { Defbutton, Glowbutton } from '@/components/Button'
 
@@ -31,9 +32,9 @@ const Login = () => {
   }
 
   return (
-    <div className='authdiv h-[90vh] flex'>
+    <div className='authdiv h-[90vh] flex '>
       {/* Left Panel */}
-      <div className='left-div h-full w-full flex flex-col items-center justify-center gap-4' id='left'>
+      <div className='left-div h-full w-full flex flex-col items-center justify-center gap-4 max-sm:gap-10' id='left'>
         {isSignup ? (
           <>
             <h1 className='text-6xl font-bold text-white text-center'>Create an Account</h1>
@@ -46,6 +47,8 @@ const Login = () => {
               <span className='text-color2'>Upload College ID Card</span>
               <input type="file" className='bg-color2 w-4/5 h-10 rounded-2xl text-white p-1.5' accept='image/*,.pdf' />
               <Glowbutton title="Sign Up" />
+              <span className="text-white hidden max-sm:block">OR</span>
+              <Defbutton title="Login" className="bg-white sm:hidden max-sm:block" onClick={toggleToLogin} />
             </form>
           </>
         ) : (
@@ -55,13 +58,15 @@ const Login = () => {
               <input type="text" className='bg-color2 w-4/5 h-10 rounded-2xl text-white p-1.5' placeholder='Email' />
               <input type="password" className='bg-color2 w-4/5 h-10 rounded-2xl text-white p-1.5' placeholder='Password' />
               <Glowbutton title="Login" />
+            <span className="text-white hidden max-sm:block">OR</span>
+            <Defbutton title="Sign Up" className="bg-white sm:hidden max-sm:block" onClick={toggleToSignup} />
             </form>
           </>
         )}
       </div>
 
       {/* Right Panel */}
-      <div className='right-div bg-color1 h-full w-full flex flex-col items-center justify-center gap-4' id='right'>
+      <div className='right-div bg-color1 h-full w-full flex flex-col items-center justify-center gap-4 max-sm:hidden' id='right'>
         {isSignup ? (
           <>
             <h1 className='text-white text-7xl font-bold text-center'>Welcome Back</h1>

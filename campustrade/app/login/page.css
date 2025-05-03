@@ -1,0 +1,17 @@
+@media (max-width:480px) {
+    body{
+        overflow-x: hidden;
+    }
+    .authdiv{
+        justify-content: normal;
+        flex-direction: column;
+    }
+    #left{
+        min-height: 100dvh;
+    }
+}
+@media (max-width:400px) {
+   #left h1{
+    font-size: 48px;
+   }
+}
