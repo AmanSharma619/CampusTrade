@@ -10,6 +10,13 @@
         height: 30px;
         width: 30px;
     }
+    #but{
+        font-size: 10px;
+        
+    }
+    #drop *{
+        font-size: 10px;
+    }
    }
 /* @media (max-width:480px) {
     .title{

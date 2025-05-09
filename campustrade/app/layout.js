@@ -2,6 +2,8 @@ import { Merriweather,Poppins} from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Provider from "@/components/Provider";
+import ProtectedRoute from "@/components/ProtectedRoute";
 import Script from "next/script";
 const font_merri = Merriweather({
   variable: "--merri",
@@ -26,14 +28,18 @@ export default function RootLayout({ children }) {
   return (
     
     <html lang="en">
+      <head>
       <Script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.7/gsap.min.js" strategy="beforeInteractive"/>
       <Script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.7/ScrollTrigger.min.js" strategy="beforeInteractive"/>
+      </head>
       <body
-        className={`${font_poppins.className}`}
+        className={`${font_poppins.className} overflow-x-hidden`}
       >
+        <Provider>
         <Navbar/>
         {children}
         {/* <Footer/> */}
+        </Provider>
       </body>
     </html>
   );
