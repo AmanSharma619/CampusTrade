@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Provider from "@/components/Provider";
+import RouteProtector from "@/components/RouteProtector";
 import Script from "next/script";
 const font_merri = Merriweather({
   variable: "--merri",
@@ -36,8 +37,10 @@ export default function RootLayout({ children }) {
       >
         <Provider>
         <Navbar/>
+          <RouteProtector>
         {children}
         {/* <Footer/> */}
+          </RouteProtector>
         </Provider>
       </body>
     </html>

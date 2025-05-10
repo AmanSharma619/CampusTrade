@@ -2,13 +2,19 @@
 import "./page.css"
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { useEffect } from 'react'
+import { UseFirebase } from "@/auth/firebase"
+import React, { useEffect, useState } from 'react'
 import {Glowbutton} from '@/components/Button'
 import Card from '@/components/Card'
 import { Inter,Roboto } from 'next/font/google'
 import Script from "next/script"
 
 const home = () => {
+  const firebase=UseFirebase()
+  const user=firebase.user
+  
+  
+
   return (
     <>
     
@@ -19,8 +25,11 @@ const home = () => {
 
       </div>
       <div className="buttons flex w-full justify-center items-center gap-4 text-2xl">
+        <Link href={'/marketplace'}>
         <Glowbutton title="Discover Marketplace" className="bg-gray-900 hover:text-purple-600"/>
-        <Glowbutton title="Register" className="bg-white text-black hover:text-purple-600" />
+        </Link>
+
+        {!user && <Link href={'/login'}><Glowbutton title="Register" className="bg-white text-black hover:text-purple-600" /></Link>}
       </div>
 
       

@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { User } from "lucide-react"
 import { Poppins } from 'next/font/google'
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth"
+import { UseFirebase } from "@/auth/firebase"
 import Link from "next/link"
 const font_inter = Poppins({
   variable: "--inter",
@@ -13,8 +14,11 @@ const font_inter = Poppins({
 });
 
 const Navbar = () => {
+  const firebase=UseFirebase()
+  console.log(firebase);
+  
   const auth = getAuth()
-  const user = auth.currentUser
+  const user=firebase.user
   const [currUser, setUser] = useState(user)
   const [name,setName]=useState(null)
 const [isDropdownOpen, setDropdownOpen] = useState(false);

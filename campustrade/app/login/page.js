@@ -27,6 +27,8 @@ const Login = () => {
   const [showPopover, setShowPopover] = useState(false)
   const [showPopover2, setShowPopover2] = useState(false)
 
+  const [error,setError]=useState(null)
+  const [signuperror,setSignupError]=useState(null)
    const auth=getAuth()
       const user=auth.currentUser
 
@@ -54,15 +56,26 @@ const Login = () => {
 
  
 
-  function signupnewuser(){
-    
-    firebase.signupUserWithEmailAndPassword(email,password).then(()=>{
-      setShowPopover2(true)
-      setTimeout(() => {
-          setShowPopover2(false); // Hide popover after 2 sec
-        }, 3500);
-    })
+  function signupnewuser() {
+  if (!name || !section || !year || !email || !password) {
+    setSignupError("Please fill in all the fields.");
+    return;
   }
+  if(password.length<6){
+    setSignupError("Password should be atleast 6 letters")
+  }
+  setSignupError(null);
+
+  firebase.signupUserWithEmailAndPassword(email, password)
+    .then(() => {
+      setShowPopover2(true);
+      setTimeout(() => setShowPopover2(false), 3500);
+    })
+    .catch((e) => {
+      setSignupError(e.message);
+    });
+}
+
 
   function SigninUser() {
     firebase.signinUserWithEmailAndPassword(SigninEmail, SigninPassword)
@@ -72,9 +85,10 @@ const Login = () => {
         setTimeout(() => {
           setShowPopover(false); // Hide popover after 2 sec
         }, 3500);
+        setError(null)
       })
       .catch((e) => {
-        console.log(e);
+        setError(e.message)
       });
   }
   
@@ -113,12 +127,13 @@ const Login = () => {
           <>
           {showPopover2 && <Signout_Popover id="popover2" className=" max-sm:absolute" height={300} width={300}/>}
             <h1 className='text-6xl font-bold text-white text-center'>Create an Account</h1>
+            {signuperror && <h2 className="text-red-600">{signuperror}</h2>}
             <div className='w-4/5 min-h-3/5 flex flex-col gap-5 items-center justify-center '>
               <input type="text" className='bg-color2 w-4/5 h-10 rounded-2xl text-white p-1.5' value={name} placeholder='Name' onChange={(e)=>{setName(e.target.value)}}/>
               <input type="text" className='bg-color2 w-4/5 h-10 rounded-2xl text-white p-1.5' value={section} placeholder='Section'  onChange={(e)=>{setSection(e.target.value)}} />
               <input type="text" className='bg-color2 w-4/5 h-10 rounded-2xl text-white p-1.5' value={year} placeholder='Passing Year'  onChange={(e)=>{setYear(e.target.value)}}/>
               <input type="email" className='bg-color2 w-4/5 h-10 rounded-2xl text-white p-1.5' value={email} placeholder='Student Email'  onChange={(e)=>{setEmail(e.target.value)}}/>
-              <input type="password" className='bg-color2 w-4/5 h-10 rounded-2xl text-white p-1.5' value={password} placeholder='Password'  onChange={(e)=>{setPassword(e.target.value)}}/>
+              <input type="password" className='bg-color2 w-4/5 h-10 rounded-2xl text-white p-1.5' value={password} placeholder='Password (min 6 letters)'  onChange={(e)=>{setPassword(e.target.value)}}/>
               <span className='text-color2'>Upload College ID Card</span>
               <input type="file" className='bg-color2 w-4/5 h-10 rounded-2xl text-white p-1.5' accept='image/*,.pdf' />
               <Glowbutton title="Sign Up" onClick={signupnewuser} />
@@ -130,6 +145,7 @@ const Login = () => {
           <>
            {showPopover && <Signin_Popover id="popover" className=" max-sm:absolute" height={300} width={300}/>}
             <h1 className='text-6xl font-bold text-center'>Login to Your Account</h1>
+            {error && <h2 className="text-red-600">Invalid Credentials</h2>}
             <div className='w-4/5 h-2/5 flex flex-col gap-5 items-center justify-center'>
               <input type="email" className='bg-color2 w-4/5 h-10 rounded-2xl text-white p-1.5' placeholder='Email' value={SigninEmail} onChange={e=> setSigninEmail(e.target.value)} />
               <input type="password" className='bg-color2 w-4/5 h-10 rounded-2xl text-white p-1.5' placeholder='Password' value={SigninPassword} onChange={e=> setSigninPassword(e.target.value)} />
