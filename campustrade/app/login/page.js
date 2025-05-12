@@ -74,13 +74,16 @@ setImage(url)
     isLoader(true)
   if (!name || !section || !year || !email || !password || !image ) {
     setSignupError("Please fill in all the fields.");
+    isLoader(false)
     return;
   }
   if(password.length<6){
     setSignupError("Password should be atleast 6 letters")
+    isLoader(false)
   }
   if(!isVerified){
     setSignupError("Verify the image first")
+    isLoader(false)
     return;
   }
   setSignupError(null);
