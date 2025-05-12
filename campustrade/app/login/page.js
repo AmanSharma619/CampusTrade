@@ -92,6 +92,7 @@ setImage(url)
       setTimeout(() => setShowPopover2(false), 3500);
     })
     .catch((e) => {
+      isLoader(false)
       setSignupError(e.message);
     });
 }
@@ -110,6 +111,7 @@ setImage(url)
         setError(null)
       })
       .catch((e) => {
+        isLoader(false)
         setError(e.message)
       });
   }
@@ -158,13 +160,14 @@ setImage(url)
               <input type="password" className='bg-color2 w-4/5 h-10 rounded-2xl text-white p-1.5' value={password} placeholder='Password (min 6 letters)'  onChange={(e)=>{setPassword(e.target.value)}}/>
               <span className='text-color2 text-center'>Upload College ID Card(image or pdf)</span>
               <IDcardinput onVerified={handleVerification} onUpload={uploadImage} />
-              <span className="text-white hidden max-sm:block">OR</span>
+              
               {loader? (
                 <Image src={"/loader.svg"} height={60} width={60} alt="loader"/>
               ) : (
                 <Glowbutton title="Sign Up" onClick={signupnewuser} />
 
               )}
+              <span className="text-white hidden max-sm:block">OR</span>
               <Defbutton title="Login" className="bg-white sm:hidden max-sm:block" onClick={toggleToLogin} />
             </div>
           </>

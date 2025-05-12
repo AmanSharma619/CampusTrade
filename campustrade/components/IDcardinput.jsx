@@ -64,10 +64,10 @@ export const IDcardinput = (props) => {
 :
 (
     isVerified ? (
-        <h2 className='text-green-500'>Verified</h2>
+        <h2 className='text-green-500 text-center content-center'>Verified</h2>
     )
     : (
-         <button className='cursor-pointer text-black bg-white rounded-lg p-1' onClick={handleverify}>Verify</button>
+         <button className='cursor-pointer text-black bg-white rounded-lg p-1 max-sm:p-0.5' onClick={handleverify}>Verify</button>
     )
    
 )
