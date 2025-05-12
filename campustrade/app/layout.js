@@ -31,6 +31,7 @@ export default function RootLayout({ children }) {
       <head>
       <Script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.7/gsap.min.js" strategy="beforeInteractive"/>
       <Script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.7/ScrollTrigger.min.js" strategy="beforeInteractive"/>
+      <Script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js" strategy="beforeInteractive"/>
       </head>
       <body
         className={`${font_poppins.className} overflow-x-hidden`}

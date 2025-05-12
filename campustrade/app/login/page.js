@@ -5,7 +5,8 @@ import { onAuthStateChanged ,getAuth,signOut} from "firebase/auth"
 import React, { useEffect, useState } from 'react'
 import {Signin_Popover,Signout_Popover} from "@/components/Popover"
 import { Defbutton, Glowbutton } from '@/components/Button'
-
+import { IDcardinput } from "@/components/IDcardinput"
+import Image from "next/image"
 
 
 
@@ -15,6 +16,7 @@ const Login = () => {
   const firebase=UseFirebase()
   const [isSignup, setIsSignup] = useState(false)
   
+  const [loader , isLoader]=useState(false)
   const [name,setName]=useState("")
   const [section,setSection]=useState("")
   const [year,setYear]=useState("")
@@ -29,6 +31,18 @@ const Login = () => {
 
   const [error,setError]=useState(null)
   const [signuperror,setSignupError]=useState(null)
+
+  const [image,setImage]=useState("")
+  const [isVerified,setVerified]=useState(false)
+
+  function handleVerification(status){
+   if(status==true){
+    setVerified(true)
+   }
+  }
+  function uploadImage(url){
+setImage(url)
+  }
    const auth=getAuth()
       const user=auth.currentUser
 
@@ -57,17 +71,23 @@ const Login = () => {
  
 
   function signupnewuser() {
-  if (!name || !section || !year || !email || !password) {
+    isLoader(true)
+  if (!name || !section || !year || !email || !password || !image ) {
     setSignupError("Please fill in all the fields.");
     return;
   }
   if(password.length<6){
     setSignupError("Password should be atleast 6 letters")
   }
+  if(!isVerified){
+    setSignupError("Verify the image first")
+    return;
+  }
   setSignupError(null);
 
   firebase.signupUserWithEmailAndPassword(email, password)
     .then(() => {
+      isLoader(false)
       setShowPopover2(true);
       setTimeout(() => setShowPopover2(false), 3500);
     })
@@ -78,9 +98,11 @@ const Login = () => {
 
 
   function SigninUser() {
+    isLoader(true)
     firebase.signinUserWithEmailAndPassword(SigninEmail, SigninPassword)
       .then(() => {
         console.log("done");
+        isLoader(false)
         setShowPopover(true); // Show popover
         setTimeout(() => {
           setShowPopover(false); // Hide popover after 2 sec
@@ -134,10 +156,15 @@ const Login = () => {
               <input type="text" className='bg-color2 w-4/5 h-10 rounded-2xl text-white p-1.5' value={year} placeholder='Passing Year'  onChange={(e)=>{setYear(e.target.value)}}/>
               <input type="email" className='bg-color2 w-4/5 h-10 rounded-2xl text-white p-1.5' value={email} placeholder='Student Email'  onChange={(e)=>{setEmail(e.target.value)}}/>
               <input type="password" className='bg-color2 w-4/5 h-10 rounded-2xl text-white p-1.5' value={password} placeholder='Password (min 6 letters)'  onChange={(e)=>{setPassword(e.target.value)}}/>
-              <span className='text-color2'>Upload College ID Card</span>
-              <input type="file" className='bg-color2 w-4/5 h-10 rounded-2xl text-white p-1.5' accept='image/*,.pdf' />
-              <Glowbutton title="Sign Up" onClick={signupnewuser} />
+              <span className='text-color2 text-center'>Upload College ID Card(image or pdf)</span>
+              <IDcardinput onVerified={handleVerification} onUpload={uploadImage} />
               <span className="text-white hidden max-sm:block">OR</span>
+              {loader? (
+                <Image src={"/loader.svg"} height={60} width={60} alt="loader"/>
+              ) : (
+                <Glowbutton title="Sign Up" onClick={signupnewuser} />
+
+              )}
               <Defbutton title="Login" className="bg-white sm:hidden max-sm:block" onClick={toggleToLogin} />
             </div>
           </>
@@ -149,7 +176,13 @@ const Login = () => {
             <div className='w-4/5 h-2/5 flex flex-col gap-5 items-center justify-center'>
               <input type="email" className='bg-color2 w-4/5 h-10 rounded-2xl text-white p-1.5' placeholder='Email' value={SigninEmail} onChange={e=> setSigninEmail(e.target.value)} />
               <input type="password" className='bg-color2 w-4/5 h-10 rounded-2xl text-white p-1.5' placeholder='Password' value={SigninPassword} onChange={e=> setSigninPassword(e.target.value)} />
-              <Glowbutton title="Login" onClick={SigninUser}  />
+             
+                {loader? (
+                <Image src={"/loader.svg"} height={60} width={60} alt="loader"/>
+              ) : (
+                <Glowbutton title="Login" onClick={SigninUser}  />
+
+              )}
               <span className="text-white hidden max-sm:block">OR</span>
               <Defbutton title="Sign Up" className="bg-white sm:hidden max-sm:block" onClick={toggleToSignup} />
             </div>

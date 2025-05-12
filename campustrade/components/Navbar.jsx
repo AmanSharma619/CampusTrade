@@ -15,8 +15,6 @@ const font_inter = Poppins({
 
 const Navbar = () => {
   const firebase=UseFirebase()
-  console.log(firebase);
-  
   const auth = getAuth()
   const user=firebase.user
   const [currUser, setUser] = useState(user)
