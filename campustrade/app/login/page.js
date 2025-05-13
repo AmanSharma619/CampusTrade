@@ -70,46 +70,68 @@ const Login = () => {
   }, []);
 
 
+  async function imageUploader() {
+  const formData = new FormData();
+  formData.append("image", file);
 
+  const res = await fetch(
+    `https://api.imgbb.com/1/upload?key=${process.env.NEXT_PUBLIC_IMGBB_API_KEY}`,
+    {
+      method: "POST",
+      body: formData,
+    }
+  );
 
+  const data = await res.json();
 
-  function signupnewuser() {
-    isLoader(true)
-    if (!name || !section || !year || !email || !password || !image) {
-      setSignupError("Please fill in all the fields.");
-      isLoader(false)
-      return;
-    }
-    if (password.length < 6) {
-      setSignupError("Password should be atleast 6 letters")
-      isLoader(false)
-    }
-    if (!isVerified) {
-      setSignupError("Verify the image first")
-      isLoader(false)
-      return;
-    }
-    setSignupError(null);
-    firebase.signupUserWithEmailAndPassword(email, password)
-      .then(async (e) => {
-        const formData = new FormData();
-        formData.append('image', file); // Append the file directly
-       let res=await fetch(`https://api.imgbb.com/1/upload?key=${process.env.NEXT_PUBLIC_IMGBB_API_KEY}`, {
-          method: 'POST',
-          body: formData
-        })
-         const data= await res.json()
-         const url= await data.data.url
-        firebase.addUser(name, e.user.uid, section, year, email, url)
-        isLoader(false)
-        setShowPopover2(true);
-        setTimeout(() => setShowPopover2(false), 3500);
-      })
-      .catch((e) => {
-        isLoader(false)
-        setSignupError(e.message);
-      });
+  if (data && data.success && data.data.url) {
+    return data.data.url;
+  } else {
+    throw new Error("Image upload failed");
   }
+}
+
+
+ async function signupnewuser() {
+  isLoader(true);
+
+  if (!name || !section || !year || !email || !password || !image) {
+    setSignupError("Please fill in all the fields.");
+    isLoader(false);
+    return;
+  }
+
+  if (password.length < 6) {
+    setSignupError("Password should be at least 6 letters");
+    isLoader(false);
+    return;
+  }
+
+  if (!isVerified) {
+    setSignupError("Verify the image first");
+    isLoader(false);
+    return;
+  }
+
+  try {
+    setSignupError(null);
+
+    const e = await firebase.signupUserWithEmailAndPassword(email, password);
+
+    const url = await imageUploader(); // Upload image, get back URL
+
+    await firebase.addUser(name, e.user.uid, section, year, email, url); // Save user data
+
+    isLoader(false);
+    setShowPopover2(true);
+    setTimeout(() => setShowPopover2(false), 5500);
+  } catch (error) {
+    console.error("Signup failed:", error);
+    setSignupError(error.message || "Signup failed");
+    isLoader(false);
+  }
+}
+
 
 
   function SigninUser() {
