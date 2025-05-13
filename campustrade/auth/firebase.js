@@ -1,9 +1,9 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import { createContext, useContext, useEffect, useState } from "react";
+import {getDatabase,ref,set} from "firebase/database"
 
 const firebaseContext = createContext(null);
-
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
   authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
@@ -11,10 +11,12 @@ const firebaseConfig = {
   storageBucket: "campustrade-dd09a.firebasestorage.app",
   messagingSenderId: "428356662749",
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+  databaseURL:"https://campustrade-dd09a-default-rtdb.firebaseio.com"
 };
 
 export const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const db=getDatabase(app)
 
 export const UseFirebase = () => useContext(firebaseContext);
 
@@ -35,9 +37,18 @@ export const FirebaseProvider = (props) => {
   const signinUserWithEmailAndPassword = (email, password) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
-
+  const addUser=(name,userId,section,year,email,photo)=>{
+    return set(ref(db, 'users/' + name), {
+    Id:userId,
+    Name:name,
+    Section:section,
+    PassYear: year,
+    Email: email,
+    PhotoURL: photo
+  });
+  }
   return (
-    <firebaseContext.Provider value={{ signupUserWithEmailAndPassword, signinUserWithEmailAndPassword, user }}>
+    <firebaseContext.Provider value={{ signupUserWithEmailAndPassword, signinUserWithEmailAndPassword,addUser,user }}>
       {props.children}
     </firebaseContext.Provider>
   );

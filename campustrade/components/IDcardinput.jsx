@@ -10,6 +10,7 @@ export const IDcardinput = (props) => {
     const [isVerified,setVerified]=useState(false)
     const [loader,setLoader]=useState(false)
     const [image,setImage]=useState(null)
+    const [imagefile,setImageFile]=useState(null)
     
     useEffect(()=>{
         if(isVerified){
@@ -18,7 +19,7 @@ export const IDcardinput = (props) => {
     },[isVerified])
     useEffect(()=>{
         if(image){
-            props.onUpload(image)
+            props.onUpload(image,imagefile)
         }
     },[image])
 
@@ -26,6 +27,7 @@ export const IDcardinput = (props) => {
         const file = e.target.files[0];
         const url= URL.createObjectURL(file)
         setImage(url)
+        setImageFile(file)
     }
       
      async function handleverify() {
@@ -38,7 +40,7 @@ export const IDcardinput = (props) => {
             
             (async () => {
                 const { data: { text } } = await worker.recognize(image);
-                console.log(text);
+              
                 
                if(text.includes("AKHILESH DAS GUPTA") || text.includes("INSTITUTE OF PROFESSIONAL STUDIES") || text.includes("PROFESSIONAL STUDIES")
             || text.includes("Akhilesh Das Gupta Institute of Technology & Management")|| text.includes("Institute of Technology & Management")|| text.includes("SHASTRI PARK")
