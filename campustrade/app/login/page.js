@@ -124,7 +124,7 @@ const Login = () => {
 
     isLoader(false);
     setShowPopover2(true);
-    setTimeout(() => setShowPopover2(false), 5500);
+    setTimeout(() => setShowPopover2(false), 3500);
   } catch (error) {
     console.error("Signup failed:", error);
     setSignupError(error.message || "Signup failed");
