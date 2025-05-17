@@ -75,7 +75,7 @@ const Login = () => {
   formData.append("image", file);
 
   const res = await fetch(
-    `https://api.imgbb.com/1/upload?key=${process.env.NEXT_PUBLIC_IMGBB_API_KEY}`,
+    "https://api.imgbb.com/1/upload?key=1a6652c53561ec237b0e9d6130ff5da1",
     {
       method: "POST",
       body: formData,
@@ -87,7 +87,7 @@ const Login = () => {
   if (data && data.success && data.data.url) {
     return data.data.url;
   } else {
-    throw new Error("Image upload failed");
+    return "error"
   }
 }
 
@@ -108,29 +108,25 @@ const Login = () => {
   }
 
   if (!isVerified) {
-    setSignupError("Verify the image first");
-    isLoader(false);
-    return;
-  }
-
-  try {
+      setSignupError("Verify the image first")
+      isLoader(false)
+      return;
+    }
     setSignupError(null);
-
-    const e = await firebase.signupUserWithEmailAndPassword(email, password);
-
-    const url = await imageUploader(); // Upload image, get back URL
-
-    await firebase.addUser(name, e.user.uid, section, year, email, url); // Save user data
-
-    isLoader(false);
-    setShowPopover2(true);
-    setTimeout(() => setShowPopover2(false), 3500);
-  } catch (error) {
-    console.error("Signup failed:", error);
-    setSignupError(error.message || "Signup failed");
-    isLoader(false);
+    firebase.signupUserWithEmailAndPassword(email, password)
+      .then( (e) => {
+        firebase.addUser(name, e.user.uid, section, year, email, "url")
+        isLoader(false)
+        setShowPopover2(true);
+        setTimeout(() => setShowPopover2(false), 3500);
+      })
+      .catch((e) => {
+        isLoader(false)
+        setSignupError(e.message);
+      });
   }
-}
+
+
 
 
 
