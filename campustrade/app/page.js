@@ -11,7 +11,7 @@ import { Inter,Roboto } from 'next/font/google'
 import SplitType from "split-type"
 
 
-const home = () => {
+const Home = () => {
   const firebase=UseFirebase()
   const user=firebase.user
   
@@ -101,4 +101,4 @@ gsap.from(".feature-heading",{
   )
 }
 
-export default home
+export default Home
