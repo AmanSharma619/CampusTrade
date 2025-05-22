@@ -1,8 +1,33 @@
 "use client"
-import React from 'react'
+import React ,{useEffect,useRef} from 'react'
 import "./Card.css"
 import { Recycle,ShieldCheck,MessageSquareMore,Bell,SlidersHorizontal } from 'lucide-react'
 const Card = () => {
+  const hasAnimatedRef = useRef(false);
+ useEffect(() => {
+    if (hasAnimatedRef.current) return;
+
+  hasAnimatedRef.current = true;
+  gsap.set(".card", {
+    transformPerspective: 1000,
+    transformStyle: "preserve-3d"
+  });
+ gsap.utils.toArray(".card").forEach((card) => {
+    gsap.from(card, {
+      rotateX: 90,
+      y: 100,
+      opacity: 0,
+      duration: 0.6,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: card,
+        start: "top 90%", 
+        toggleActions: "play none none none"
+      }
+    });
+  });
+}, []);
+
      const data=[
         {
            icon: <ShieldCheck size={70}/>,

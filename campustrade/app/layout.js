@@ -34,13 +34,13 @@ export default function RootLayout({ children }) {
       <Script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js" strategy="beforeInteractive"/>
       </head>
       <body
-        className={`${font_poppins.className} overflow-x-hidden`}
+        className={`${font_poppins.className} overflow-x-hidden `}
       >
         <Provider>
         <Navbar/>
           <RouteProtector>
         {children}
-        {/* <Footer/> */}
+        <Footer/>
           </RouteProtector>
         </Provider>
       </body>
