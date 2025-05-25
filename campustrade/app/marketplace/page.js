@@ -1,43 +1,64 @@
-
-import React from 'react'
+"use client"
+import React ,{useState,createContext, useContext}from 'react'
 import "./marketplace.css"
 import Item from '@/components/Item'
 import Utilbox from '@/components/Utilbox'
-import { Defbutton } from '@/components/Button'
-const page = () => {
 
+export const FilterContext = createContext()
+const Marketplace = () => {
+  const [params,setParams]=useState(["Requested","Selling","Lending"])
+
+  const data=[
+    {
+      id:"1",
+      title:"Calculator",
+      name:"aman sharma",
+      section:"s1",
+      action:"Requested"
+    },
+    {
+      id:"2",
+      title:"Calculator",
+      name:"aman sharma",
+      section:"s1",
+      action:"Lending"
+    },
+    {
+      id:"3",
+      title:"Calculator",
+      name:"aman sharma",
+      section:"s1",
+      action:"Selling"
+    }
+  ]
   return (
-    <div className='flex  linear mark min-h-screen'>
-      <div className="left">
-        <Utilbox/>
-      </div>
+ <>
+    <FilterContext.Provider value={{params,setParams}}>
 
-      <div className='flex flex-col right'>
-        <div className='w-full h-[10vh] flex items-center'> 
-         
-          
-      <span className='flex gap-5 float-left '>
+    <div className='flex flex-col  linear mark min-h-screen'>
+      
 
-<button className="btn">
-      Sell/Lend 
-    </button>
-
-<button className="btn">
-      Request 
-    </button>
-      </span>
-        </div>
+     <Utilbox  />
 
       <div className='lower bg-transparent h-full w-full flex flex-wrap justify-around p-3 gap-7 '>
-
-        <Item title="Calculator" name="Aman Sharma" section="S1" action="Requested" />
-        <Item title="Calculator" name="Aman Sharma" section="S1" action="Lending" />
-        <Item title="Calculator" name="Aman Sharma" section="S1" action="Selling" />
+        
+        {
+          data.map((item)=>{
+            if(params.indexOf(item.action)!=-1){
+              return (
+                <Item key={item.id} title={item.title} name={item.name} section={item.section} action={item.action}/>
+              )
+            }
+          }
+          
+        )
+      }
       </div>
-
       </div>
-    </div>
+      </FilterContext.Provider>
+      
+      </>
   )
 }
 
-export default page
+export default Marketplace

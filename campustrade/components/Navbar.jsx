@@ -54,11 +54,11 @@ const [isDropdownOpen, setDropdownOpen] = useState(false);
 
 {/* User button */}
 
-             <div className="relative inline-block text-left">
-  <div>
+             <div className="relative flex items-center text-left ">
+  <div >
     <button
       type="button"
-      className=" inline-flex items-center justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm  font-semibold text-gray-900 shadow-xs ring-1 ring-gray-300 ring-inset hover:bg-gray-50"
+      className=" inline-flex items-center justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm  font-semibold text-gray-900 shadow-xs ring-1 ring-gray-300 ring-inset hover:bg-gray-50 login"
       onClick={() => setDropdownOpen((prev) => !prev)}
       aria-expanded={isDropdownOpen}
       aria-haspopup="true"

@@ -5,17 +5,6 @@
 .hero h2{
   text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.6);
 }
-@keyframes moveGradient {
-    0% {
-      background-position: 0% 50%;
-    }
-    50%{
-        background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
-  }
 .main{
   margin: 0;
   --x: calc(var(--posX, 0) * 1px);
@@ -59,6 +48,20 @@
   button{
     font-size: 24px;
   }
+   #book{
+    width: 50px;
+  }
+  .book{
+    left: 16vw;
+    top: 1vh;
+  }
+  #calc{
+    width: 60px;
+  }
+  .calc{
+    right: 16vw;
+    top: 5vh;
+  }
  }
  @media (max-width:390px) {
   .main{
@@ -75,7 +78,7 @@
     padding: 0px;
   }
   .hero h1{
-    font-size: 85px;
+    font-size: 76px;
   }
   .hero h2{
     font-size: 25px;
@@ -86,6 +89,20 @@
   }
   button{
     font-size: 19px;
+  }
+  #book{
+    width: 45px;
+  }
+  .book{
+    left: 16vw;
+    top: 1vh;
+  }
+  #calc{
+    width: 50px;
+  }
+  .calc{
+    right: 16vw;
+    top: 5vh;
   }
  }
  .features{

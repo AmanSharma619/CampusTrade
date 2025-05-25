@@ -18,12 +18,6 @@
         font-size: 10px;
     }
    }
-/* @media (max-width:480px) {
-    .title{
-        font-size: 18px;
-    }
-    #logo{
-        height: 30px;
-        width: 30px;
-    }
-   } */
+@media (max-width:370px) {
+   
+   }
