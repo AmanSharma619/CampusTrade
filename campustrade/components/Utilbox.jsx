@@ -5,7 +5,7 @@ import { Glowbutton } from './Button'
 import React, { useState, useEffect } from 'react'
 import { Filter } from './Filter'
 
-const Utilbox = (props) => {
+const Utilbox = () => {
   const [viewportWidth, setViewportWidth] = useState(0);
 
   useEffect(() => {
