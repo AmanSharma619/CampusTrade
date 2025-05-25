@@ -1,9 +1,9 @@
 "use client"
-import React ,{useState,createContext, useContext}from 'react'
+import React ,{useState,createContext, }from 'react'
 import "./marketplace.css"
 import Item from '@/components/Item'
 import Utilbox from '@/components/Utilbox'
-
+import Script from 'next/script'
 export const FilterContext = createContext()
 const Marketplace = () => {
   const [params,setParams]=useState(["Requested","Selling","Lending"])
@@ -12,22 +12,36 @@ const Marketplace = () => {
     {
       id:"1",
       title:"Calculator",
-      name:"aman sharma",
-      section:"s1",
+      name:"Aman Sharma",
+      section:"S1",
       action:"Requested"
     },
     {
       id:"2",
       title:"Calculator",
-      name:"aman sharma",
-      section:"s1",
+      name:"Palak Bansal",
+      section:"S1",
       action:"Lending"
     },
     {
       id:"3",
       title:"Calculator",
-      name:"aman sharma",
-      section:"s1",
+      name:"Naman Bansal",
+      section:"S1",
+      action:"Selling"
+    },
+    {
+      id:"4",
+      title:"Calculator",
+      name:"Naman Bansal",
+      section:"S1",
+      action:"Selling"
+    },
+    {
+      id:"5",
+      title:"Calculator",
+      name:"Naman Bansal",
+      section:"S1",
       action:"Selling"
     }
   ]

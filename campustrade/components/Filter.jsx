@@ -19,7 +19,7 @@ const handleCheckboxChange = (label, isChecked) => {
 };
 
   return (
-    <div className="flex items-center justify-center p-4">
+    <div className={`flex items-center justify-center p-4 max-sm:p-1 `}>
       <div className="relative inline-block">
         <button
           id="dropdownDefault"

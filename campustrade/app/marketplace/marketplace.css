@@ -1,3 +1,6 @@
+body{
+  overflow-x: hidden;
+}
 .mark{
     background: url(/image.png);
     background-size: cover;
@@ -26,4 +29,10 @@
   border-right: 2px solid rgb(238, 103, 238);
   box-shadow: rgba(240, 46, 170, 0.4) 5px 5px, rgba(240, 46, 170, 0.3) 10px 10px,
     rgba(240, 46, 170, 0.2) 15px 15px;
+}
+@media (max-width:460px) {
+  .mark{
+    background-position: center;
+  }
+
 }

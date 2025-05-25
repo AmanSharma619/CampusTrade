@@ -75,11 +75,11 @@ gsap.from(".feature-heading",{
       </div>
       <div className="buttons flex w-full justify-center items-center gap-4 text-2xl">
         <Link href={'/marketplace'}>
-        <Glowbutton title="Discover Marketplace" className="bg-gray-900 hover:text-purple-600"/>
+        <Glowbutton title="Discover Marketplace" className="bg-gray-900 hover:text-purple-600 homebut"/>
         </Link>
 
-        {!user && <Link href={'/login'}><Glowbutton title="Register" className="bg-white text-black hover:text-purple-600" /></Link>}
-        {user &&  <Link href={"/services"}> <Glowbutton title="Request Services" className="bg-gray-900 hover:text-purple-600"/></Link> }
+        {!user && <Link href={'/login'}><Glowbutton title="Register" className="bg-white text-black hover:text-purple-600 homebut" /></Link>}
+        {user &&  <Link href={"/services"}> <Glowbutton title="Request Services" className="bg-gray-900 hover:text-purple-600 homebut"/></Link> }
       </div>
       <span className="absolute rotate-12 right-64 bottom-64 max-md:top-20 max-md:right-16 calc text-white">
         <Calculator size={80} strokeWidth={0.5} id="calc"/>
