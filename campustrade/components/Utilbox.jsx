@@ -6,10 +6,11 @@ import React, { useState, useEffect } from 'react'
 import { Filter } from './Filter'
 
 const Utilbox = (props) => {
-  const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
+  const [viewportWidth, setViewportWidth] = useState(0);
 
   useEffect(() => {
     const handleResize = () => setViewportWidth(window.innerWidth);
+    handleResize()
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
