@@ -43,7 +43,7 @@ const [isDropdownOpen, setDropdownOpen] = useState(false);
     return (
       <>
         <nav className={` ${font_inter.className}  bg-black sticky z-20 top-0 start-0 border-b-2 border-gray-700 dark:border-gray-600`}>
-          <div className="max-w-screen-xl flex items-center justify-between mx-auto p-4">
+          <div className="max-w-screen-xl flex items-center justify-between mx-auto p-4 ">
             <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
               <span className="logo">
                 <Image src={"/logo.png"} id="logo" width={50} height={50} alt="logo" />
@@ -73,7 +73,7 @@ const [isDropdownOpen, setDropdownOpen] = useState(false);
   </div>
 
   {isDropdownOpen && (
-    <div className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-hidden" role="menu">
+    <div className="absolute right-0 top-full z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-hidden" role="menu">
       <div className="py-1" role="none" id="drop">
         <a href="#" className="block px-4 py-2 text-sm text-gray-700" role="menuitem">Account settings</a>
         <button onClick={() => {

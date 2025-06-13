@@ -19,16 +19,16 @@ const Home = () => {
 
 const hasAnimatedRef = useRef(false);
 
+
 useEffect(() => {
   if (hasAnimatedRef.current) return;
-
   hasAnimatedRef.current = true;
 
   const text = new SplitType("#head");  
   const text2 = new SplitType("#subtext");
 
+  // Initial entrance animation (optional)
   const t = gsap.timeline();
-
   t.from("#head .char", {
     y: 130,
     opacity: 0,
@@ -53,18 +53,21 @@ useEffect(() => {
     duration: 0.8,
     ease: "power1.out"
   });
-gsap.from(".feature-heading",{
-  scale:0,
-  opacity:0,
-  duration:0.8,
-  scrollTrigger:{
-    trigger:".features",
-    start: "top 70%"
-  }
-})
+
+  gsap.from(".feature-heading",{
+    scale:0,
+    opacity:0,
+    duration:0.8,
+    scrollTrigger:{
+      trigger:".features",
+      start: "top 70%"
+    }
+  });
+
+  
+  
 
 }, []);
-
   return (
     <> 
     <div className='min-h-screen flex font-bold flex-col sticky top-0 gap-5 main '  >   

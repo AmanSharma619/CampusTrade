@@ -5,7 +5,7 @@ import { Glowbutton } from './Button'
 import React, { useState, useEffect } from 'react'
 import { Filter } from './Filter'
 
-const Utilbox = () => {
+const Utilbox = (props) => {
   const [viewportWidth, setViewportWidth] = useState(0);
 
   useEffect(() => {
@@ -39,7 +39,11 @@ const Utilbox = () => {
       </div>
         <span className=' top-full '>
         <Glowbutton title="Request" className="bg-gray-900 text-sm hover:scale-105 " />
-        <Glowbutton title="Sell/Lend" className="bg-gray-900 text-sm hover:scale-105" />
+        <Glowbutton title="Sell/Lend" className="bg-gray-900 text-sm hover:scale-105" onClick={()=>{
+          console.log("clicked");
+          props.setShowForm(true);
+          
+        }}/>
       </span>
               </div>
     );
@@ -65,7 +69,11 @@ const Utilbox = () => {
       <Filter />
       <span>
         <Glowbutton title="Request" className="bg-gray-900 text-sm hover:scale-105 " />
-        <Glowbutton title="Sell/Lend" className="bg-gray-900 text-sm hover:scale-105" />
+        <Glowbutton title="Sell/Lend" className="bg-gray-900 text-sm hover:scale-105" onClick={()=>{
+          console.log("clicked");
+          props.setShowForm(true);
+          
+        }} />
       </span>
     </div>
   );
