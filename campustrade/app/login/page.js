@@ -118,7 +118,7 @@ const Login = () => {
 
       firebase.signupUserWithEmailAndPassword(email, password)
         .then( (e) => {
-          firebase.addUser(name, e.user.uid, section, year, email, url)
+          firebase.addUser(name, e.user.uid, section, year, email, "url")
           isLoader(false)
           setShowPopover2(true);
           setTimeout(() => setShowPopover2(false), 3500);

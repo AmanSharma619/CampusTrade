@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import { createContext, useContext, useEffect, useState } from "react";
-import {getDatabase,ref,set} from "firebase/database"
+import {getDatabase,ref,set,child,get} from "firebase/database"
 
 const firebaseContext = createContext(null);
 const firebaseConfig = {
@@ -22,10 +22,12 @@ export const UseFirebase = () => useContext(firebaseContext);
 
 export const FirebaseProvider = (props) => {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
+      setLoading(false);
     });
     return () => unsubscribe(); // cleanup listener on unmount
   }, []);
@@ -38,7 +40,7 @@ export const FirebaseProvider = (props) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
   const addUser=(name,userId,section,year,email,photo)=>{
-    return set(ref(db, 'users/' + name), {
+    return set(ref(db, 'users/' + userId), {
     Id:userId,
     Name:name,
     Section:section,
@@ -47,8 +49,24 @@ export const FirebaseProvider = (props) => {
     PhotoURL: photo
   });
   }
+  const getUserByUID = async (userId) => {
+  const snapshot = await get(child(ref(db), `users/${userId}`));
+  if (snapshot.exists()) {
+    const data = snapshot.val();
+  return {
+      Id: data.Id,
+      Name: data.Name,
+      Section: data.Section,
+      PassYear: data.PassYear,
+      Email: data.Email,
+      PhotoURL: data.PhotoURL
+  }
+  } else {
+    console.log("No data found");
+  }
+};
   return (
-    <firebaseContext.Provider value={{ signupUserWithEmailAndPassword, signinUserWithEmailAndPassword,addUser,user }}>
+    <firebaseContext.Provider value={{ signupUserWithEmailAndPassword, signinUserWithEmailAndPassword,addUser,user,getUserByUID ,loading}}>
       {props.children}
     </firebaseContext.Provider>
   );
