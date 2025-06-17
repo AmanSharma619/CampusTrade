@@ -23,5 +23,16 @@ export async function POST(request) {
 }
 export async function GET(request) {
     await ConnectDB()
+    try{
 
+        const items = await Item.find({});
+        console.log(items);
+        return NextResponse.json(items, { status: 200 });
+        
+    } catch (error) {
+        console.error("Error fetching items:", error);
+        return NextResponse.json({ error: "Failed to fetch items" }, { status: 500 });
+    }
+
+    
 }

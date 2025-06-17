@@ -38,9 +38,10 @@ const Utilbox = (props) => {
         <Filter />
       </div>
         <span className=' top-full '>
-        <Glowbutton title="Request" className="bg-gray-900 text-sm hover:scale-105 " />
+        <Glowbutton title="Request" className="bg-gray-900 text-sm hover:scale-105 " onClick={()=>{
+          props.setShowRequestForm(true);
+        }}/>
         <Glowbutton title="Sell/Lend" className="bg-gray-900 text-sm hover:scale-105" onClick={()=>{
-          console.log("clicked");
           props.setShowForm(true);
           
         }}/>
@@ -68,7 +69,10 @@ const Utilbox = (props) => {
       </div>
       <Filter />
       <span>
-        <Glowbutton title="Request" className="bg-gray-900 text-sm hover:scale-105 " />
+        <Glowbutton title="Request" className="bg-gray-900 text-sm hover:scale-105 " onClick={()=>{
+          props.setShowRequestForm(true);
+          
+        }}/>
         <Glowbutton title="Sell/Lend" className="bg-gray-900 text-sm hover:scale-105" onClick={()=>{
           console.log("clicked");
           props.setShowForm(true);

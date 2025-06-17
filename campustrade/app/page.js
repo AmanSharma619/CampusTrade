@@ -47,6 +47,12 @@ useEffect(() => {
     duration: 0.8,
     ease: "power1.out"
   });
+  t.from("#book", {
+    y: 200,
+    opacity: 0,
+    duration: 0.8,
+    ease: "power1.out"
+  });
   t.to("#calc",{
     y:10,
     duration:1,
@@ -54,12 +60,6 @@ useEffect(() => {
     yoyo:true,
    
   })
-  t.from("#book", {
-    y: 200,
-    opacity: 0,
-    duration: 0.8,
-    ease: "power1.out"
-  });
   t.to("#book",{
     y:19,
     duration:1,

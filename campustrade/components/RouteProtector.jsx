@@ -27,7 +27,7 @@ const RouteProtector = ({ children }) => {
     return (
       <div className="w-full flex justify-center items-center flex-col">
         <Image src={"/loader2.svg"} width={400} height={500} alt="loader" />
-        <h2 className="text-white text-3xl text-center">Loading...</h2>
+        <h2 className="text-white text-3xl text-center">Authenticating...</h2>
       </div>
     );
   }

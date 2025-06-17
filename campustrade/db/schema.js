@@ -1,12 +1,4 @@
 import mongoose from "mongoose";
-import { act } from "react";
-
-const today = new Date();
-const formatted = new Intl.DateTimeFormat('en-IN', {
-  day: '2-digit',
-  month: 'long',
-  year: 'numeric'
-}).format(today);
 
 const ItemSchema = new mongoose.Schema({
     name: String,
@@ -20,7 +12,7 @@ const ItemSchema = new mongoose.Schema({
     image: String,
     createdAt: {
         type: Date,
-        default: formatted,
+        default: Date.now,
     },
 })
 export default mongoose.models.Item || mongoose.model("Item", ItemSchema);
