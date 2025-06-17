@@ -19,7 +19,7 @@ const Utilbox = (props) => {
     return (
       <div className='flex flex-col items-center'>
 
-      <div className='flex items-center w-full h-[10vh] bg-transparent relative justify-center util p-2'>
+      <div className='flex items-center w-full min-h-[10vh] bg-transparent relative justify-center util p-2'>
         <div className="w-[90%]">
           <div className="relative">
             <input
@@ -51,7 +51,7 @@ const Utilbox = (props) => {
   }
 
   return (
-    <div className='flex items-center w-full h-[10vh] bg-transparent relative justify-around util'>
+    <div className='flex items-center w-full min-h-[10vh] bg-transparent relative justify-around util'>
       <div className="w-[50%]">
         <div className="relative">
           <input

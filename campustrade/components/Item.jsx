@@ -18,7 +18,7 @@ const Item = (props) => {
           >
             Close
           </button>
-          <div className='relative w-full h-48 rounded-xl mb-4'>
+          <div className='relative w-full max-sm:w-[90%] h-48 rounded-xl mb-4'>
             <Image src={props.image} alt="image" fill style={{ objectFit: 'contain', width: '100%' }} />
           </div>
           <div className='flex items-center gap-2 mb-2'>
@@ -39,7 +39,7 @@ const Item = (props) => {
             <h2 className='text-lg font-semibold  text-purple-800'>{props.date}</h2>
           </div>
           {/* Add more detailed info here if available */}
-          <Defbutton title="Chat Now" className="bg-black w-full chatbut text-white hover:text-purple-600 text-sm hover:scale-105 transition duration-200 border-2 border-purple-800 mt-4" />
+          <Defbutton title="Chat Now" className="bg-black w-full chatbut text-white hover:text-purple-600 text-sm hover:scale-105 transition duration-200 border-2 border-purple-800 mt-2" />
         </div>
       </div>
     );
@@ -47,7 +47,7 @@ const Item = (props) => {
 
   return (
     <div
-      className='min-w-[17vw] min-h-[45vh] bg-tranparent rounded-xl flex flex-col p-2 gap-2 max-sm:gap-0.5 flex-wrap justify-evenly text-white item hover:scale-105 transition duration-200 border-2 border-white cursor-pointer'
+      className='min-w-[17vw] min-h-[47vh] bg-tranparent rounded-xl flex flex-col p-2 gap-2 max-sm:gap-0.5 flex-wrap justify-evenly text-white item hover:scale-105 transition duration-200 border-2 border-white cursor-pointer'
       onClick={() => setShowDetails(true)}
     >
 
