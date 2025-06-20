@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react'
 import { UseFirebase } from '@/auth/firebase';
-import { set } from 'mongoose';
+
 
 const SellForm = (props) => {
   const [image, setImage] = useState(null);
@@ -15,7 +15,7 @@ const SellForm = (props) => {
 
   const [submitting, setSubmitting] = useState(false);
 
-  let data;
+
   let firebase = UseFirebase();
   const user = firebase.user;
 
@@ -39,19 +39,25 @@ const SellForm = (props) => {
       });
       const imageData = await res.json();
       const imageUrl = imageData.secure_url;
+
       const data = await firebase.getUserByUID(user.uid)
       const userName = data.Name;
       const userSection = data.Section;
+     
+     
+      
       await fetch("/api/items", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          userID: user.uid,
           name: userName,
           section: userSection,
           item: title,
           description: description,
           action: action,
           image: imageUrl,
+          imagePublicID: imageData.public_id,
         }),
       });
       setSuccess(true);

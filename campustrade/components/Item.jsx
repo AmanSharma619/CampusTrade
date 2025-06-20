@@ -1,6 +1,5 @@
 "use client"
 import "./item.css"
-import { MessageCircle } from 'lucide-react'
 import Image from 'next/image'
 import React, { useState } from 'react'
 import { Defbutton } from "./Button"
@@ -8,6 +7,29 @@ import { Defbutton } from "./Button"
 const Item = (props) => {
   const [showDetails, setShowDetails] = useState(false);
 
+  async function handleDelete(e) {
+    e.stopPropagation()
+    const confirmDelete = confirm("Are you sure you want to delete this item?");
+    if (!confirmDelete) return
+    try{
+      let res=await fetch(`/api/mylistings?id=${props.id}`, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+      })
+      let result = await res.json();
+      if(res.ok){
+        alert("Item deleted successfully");
+        window.location.reload();
+      }
+      else{
+        alert("Failed to delete item: " + result.error);
+      }
+    }
+    catch (error) {
+    console.error("Error deleting item:", error); 
+    alert("Failed to delete item. Please try again later.");
+  }  
+}
   if (showDetails) {
     return (
       <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#181c24]/70 backdrop-blur-sm">
@@ -38,7 +60,7 @@ const Item = (props) => {
             <h2 className='text-lg font-semibold  text-purple-800'>{props.name} {props.section}</h2>
             <h2 className='text-lg font-semibold  text-purple-800'>{props.date}</h2>
           </div>
-          {/* Add more detailed info here if available */}
+          
           <Defbutton title="Chat Now" className="bg-black w-full chatbut text-white hover:text-purple-600 text-sm hover:scale-105 transition duration-200 border-2 border-purple-800 mt-2" />
         </div>
       </div>
@@ -47,15 +69,15 @@ const Item = (props) => {
 
   return (
     <div
-      className='min-w-[17vw] min-h-[47vh] bg-tranparent rounded-xl flex flex-col p-2 gap-2 max-sm:gap-0.5 flex-wrap justify-evenly text-white item hover:scale-105 transition duration-200 border-2 border-white cursor-pointer'
+      className='min-w-[17vw] mx-auto max-w-[20vw] max-sm:max-w-[42vw] min-sm:min-h-[45vh] max-sm:h-[35vh] bg-tranparent rounded-xl flex flex-col p-2 gap-2 max-sm:gap-0.5 flex-wrap justify-evenly text-white item hover:scale-105 transition duration-200 border-2 border-white cursor-pointer'
       onClick={() => setShowDetails(true)}
     >
 
-      <div className='relative w-full h-[50%] rounded-xl'>
+      <div className='relative w-full h-[50%] max-sm:h-[45%] rounded-xl'>
         <Image src={props.image} alt="image" fill style={{ objectFit: 'contain', width: '100%' }} />
       </div>
       <div className='flex items-center gap-1.5 flex-wrap max-sm:flex-col max-sm:items-start'>
-        <h1 className='text-2xl'>
+        <h1 className='text-2xl max-sm:whitespace-nowrap max-sm:text-lg '>
           {props.title.length <= 10 ? props.title : props.title.slice(0, 9) + "..."}
         </h1>
 
@@ -68,16 +90,19 @@ const Item = (props) => {
       </div>
 
       <div className=" max-sm:w-full max-sm:gap-2 max-sm:items-center ">
-        <span className="flex gap-2">
+        {!props.delete ?<span className="flex gap-2">
           <h2 className='text-lg max-sm:text-sm'>{props.name}</h2>
           <h2 className='text-lg max-sm:text-sm'>{props.section}</h2>
           {/* <h2 className='text-xl max-sm:text-sm'>{props.section}</h2> */}
-        </span>
+        </span> : null}
         <h2 className="text-gray-300 max-sm:text-sm">{props.date}</h2>
       </div>
       <div className="w-full flex justify-center ">
-        <Defbutton title="Chat Now" className="bg-black w-full chatbut  text-white hover:text-purple-600 text-sm hover:scale-105 transition duration-200 border-2 border-purple-800">
-        </Defbutton>
+        {!props.delete ?<Defbutton title="Chat Now" className="bg-black max-sm:hidden w-full chatbut  text-white hover:text-purple-600 text-sm hover:scale-105 transition duration-200 border-2 border-purple-800">
+        </Defbutton> :
+          <Defbutton title="Delete" className="bg-red-500 w-full chatbut text-white  text-sm hover:scale-105 transition duration-200 border-2 border-purple-800" onClick={handleDelete}/>
+         }
+       
       </div>
 
     </div>

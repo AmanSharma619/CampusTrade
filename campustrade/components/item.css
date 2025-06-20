@@ -3,7 +3,8 @@
 }
 @media (max-width:460px) {
   .item{
-    width: 60vw;
+    width: 55vw;
+
   }
   .chatbut{
     padding: 10px;

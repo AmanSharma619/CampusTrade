@@ -7,17 +7,19 @@ export async function POST(request) {
     await ConnectDB();
 
     const body=await request.json();
-    const { name, section, item, description, action, image } = body;
-    if (!name || !section || !item || !description || !action || !image) {
+    const {userID, name, section, item, description, action, image,imagePublicID } = body;
+    if (!name || !section || !item || !description || !action || !image || !userID || !imagePublicID) {
         return NextResponse.json({ error: "All fields are required" }, { status: 400 });
     }
     const newItem= await Item.create({
+        userID,
         name,
         section,
         item,
         description,
         action,
-        image
+        image,
+        imagePublicID
     });
     return NextResponse.json({ message: "Item listed successfully!", item: newItem }, { status: 201 });
 }

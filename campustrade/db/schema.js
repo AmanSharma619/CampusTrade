@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 const ItemSchema = new mongoose.Schema({
+    userID: String,
     name: String,
     section: String,
     item: String,
@@ -10,6 +11,7 @@ const ItemSchema = new mongoose.Schema({
         enum: ["Requested", "Selling", "Lending"],
     },
     image: String,
+    imagePublicID: String,
     createdAt: {
         type: Date,
         default: Date.now,

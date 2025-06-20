@@ -29,12 +29,14 @@ const RequestForm = (props) => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          userID: user.uid,
           name: userName,
           section: userSection,
           item: title,
-          image: "https://i.ibb.co/6hmR0y0/requested.jpg",
           description: description,
           action: action,
+          image: "https://i.ibb.co/6hmR0y0/requested.jpg",
+          imagePublicID: "requested",
         }),
       });
       setSuccess(true);

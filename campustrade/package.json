@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "cloudinary": "^2.7.0",
     "firebase": "^11.6.1",
     "lucide-react": "^0.488.0",
     "mongoose": "^8.15.2",

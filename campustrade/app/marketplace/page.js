@@ -20,8 +20,9 @@ const Marketplace = () => {
         method: "GET",
         headers: {
           "Content-Type": "application/json"
-        }
-      }, cache = "force-cache")
+        },
+        cache : "no-cache",
+      })
       const resdata = await res.json()
       setData(resdata)
 
@@ -68,7 +69,7 @@ const Marketplace = () => {
 
           <Utilbox setShowForm={setShowForm} setShowRequestForm={setShowRequestForm} />
 
-          <div className='lower bg-transparent h-full w-full flex flex-wrap justify-around p-3 gap-7 '>
+          <div className='lower bg-transparent h-full w-full flex  max-sm:justify-between p-3 gap-7 flex-wrap'>
 
             {
               data.map((item) => {

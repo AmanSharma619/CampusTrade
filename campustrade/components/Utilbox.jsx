@@ -4,6 +4,7 @@ import "./util.css"
 import { Glowbutton } from './Button'
 import React, { useState, useEffect } from 'react'
 import { Filter } from './Filter'
+import Link from 'next/link'
 
 const Utilbox = (props) => {
   const [viewportWidth, setViewportWidth] = useState(0);
@@ -24,7 +25,7 @@ const Utilbox = (props) => {
           <div className="relative">
             <input
               className="w-full focus:bg-gray-800 bg-transparent placeholder:text-slate-400 text-white text-sm border border-slate-200 rounded-md pl-3 pr-28 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow"
-              placeholder="Calculator, Lab coat..."
+              placeholder="Calculator..."
               />
             <button
               className="absolute top-1 right-1 flex items-center rounded bg-transparent p-0.5 border border-transparent text-center text-sm text-white transition-all shadow-sm hover:shadow focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
@@ -52,14 +53,14 @@ const Utilbox = (props) => {
 
   return (
     <div className='flex items-center w-full min-h-[10vh] bg-transparent relative justify-around util'>
-      <div className="w-[50%]">
+      <div className="w-[30%]">
         <div className="relative">
           <input
             className="w-full focus:bg-gray-800 bg-transparent placeholder:text-slate-400 text-white text-sm border border-slate-200 rounded-md pl-3 pr-28 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow"
-            placeholder="Calculator, Lab coat..."
+            placeholder="Calculator..."
           />
           <button
-            className="absolute top-1 right-1 flex items-center rounded bg-transparent py-0.5 px-2.5 border border-transparent text-center text-sm text-white transition-all shadow-sm hover:shadow focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+            className="absolute top-1 right-1 flex items-center rounded bg-transparent py-0.5 px-2 max-sm:px-1 border border-transparent text-center text-sm text-white transition-all shadow-sm hover:shadow focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
             type="button"
           >
             <Search />
@@ -78,6 +79,9 @@ const Utilbox = (props) => {
           props.setShowForm(true);
           
         }} />
+        <Link href="/marketplace/mylistings">
+        <Glowbutton title="My Listings" className="bg-gray-900 text-sm hover:scale-105" onClick={props.onShowListings} />
+        </Link>
       </span>
     </div>
   );
