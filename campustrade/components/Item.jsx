@@ -69,7 +69,7 @@ const Item = (props) => {
 
   return (
     <div
-      className='min-w-[17vw] mx-auto max-w-[20vw] max-sm:max-w-[42vw] min-sm:min-h-[45vh] max-sm:h-[35vh] bg-tranparent rounded-xl flex flex-col p-2 gap-2 max-sm:gap-0.5 flex-wrap justify-evenly text-white item hover:scale-105 transition duration-200 border-2 border-white cursor-pointer'
+      className='min-w-[17vw] mx-auto max-w-[20vw] backdrop-blur-xl max-sm:max-w-[42vw] min-sm:min-h-[45vh] max-sm:h-[35vh] bg-tranparent rounded-xl flex flex-col p-2 gap-2 max-sm:gap-0.5 flex-wrap justify-evenly text-white item hover:scale-105 transition duration-200 border-0 border-white cursor-pointer'
       onClick={() => setShowDetails(true)}
     >
 
@@ -98,9 +98,9 @@ const Item = (props) => {
         <h2 className="text-gray-300 max-sm:text-sm">{props.date}</h2>
       </div>
       <div className="w-full flex justify-center ">
-        {!props.delete ?<Defbutton title="Chat Now" className="bg-black max-sm:hidden w-full chatbut  text-white hover:text-purple-600 text-sm hover:scale-105 transition duration-200 border-2 border-purple-800">
+        {!props.delete ?<Defbutton title="Chat Now" className="bg-transparent max-sm:hidden w-full chatbut  text-white hover:text-purple-600 text-sm hover:scale-105 transition duration-200 border-0 border-purple-800">
         </Defbutton> :
-          <Defbutton title="Delete" className="bg-red-500 w-full chatbut text-white  text-sm hover:scale-105 transition duration-200 border-2 border-purple-800" onClick={handleDelete}/>
+          <Defbutton title="Delete" className="bg-red-500 w-full chatbut text-white  text-sm hover:scale-105 transition duration-200 border-0 border-purple-800" onClick={handleDelete}/>
          }
        
       </div>

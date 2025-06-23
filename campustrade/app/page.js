@@ -83,7 +83,7 @@ useEffect(() => {
 }, []);
   return (
     <> 
-    <div className='min-h-screen flex font-bold flex-col sticky top-0 gap-5 main '  >   
+    <div className='min-h-screen flex font-bold flex-col  top-0 gap-5 main '  >   
       <div className="hero w-full text-9xl mx-auto  text-white tracking-wide text-center min-h-4/5 flex flex-col gap-6 mt-14 p-9 ">
         <h1 className=' tracking-wider overflow-y-hidden' id="head" >Buy. Sell. Borrow. </h1>
          <h2 className='text-5xl font-normal ' id="subtext">From One Student to Another, A Marketplace Exclusively for Your College.</h2>
@@ -106,7 +106,7 @@ useEffect(() => {
       
 
     </div>
-    <div className={`min-h-screen bg-white sticky  text-white features flex flex-col justify-around p-3.5 gap-3 `}> 
+    <div className={`min-h-screen bg-white   text-white features flex flex-col justify-around p-3.5 gap-3 `}> 
       <h1 className='text-7xl mx-auto font-bold tracking-wide mt-7 feature-heading'>Features</h1>
       <div className={` cards mt-6`}>
         <Card/>
