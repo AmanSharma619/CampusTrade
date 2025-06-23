@@ -1,7 +1,7 @@
 "use client"
 import { Search } from 'lucide-react'
 import "./util.css"
-import { Glowbutton } from './Button'
+import { Defbutton, Glowbutton } from './Button'
 import React, { useState, useEffect } from 'react'
 import { Filter } from './Filter'
 import Link from 'next/link'
@@ -38,14 +38,17 @@ const Utilbox = (props) => {
         </div>
         <Filter />
       </div>
-        <span className=' top-full '>
-        <Glowbutton title="Request" className="bg-gray-900 text-sm hover:scale-105 " onClick={()=>{
+        <span className=' top-full flex gap-2 mb-3'>
+        <Defbutton title="Request" className="bg-white text-xs me-0 hover:scale-105 rounded-4xl " onClick={()=>{
           props.setShowRequestForm(true);
         }}/>
-        <Glowbutton title="Sell/Lend" className="bg-gray-900 text-sm hover:scale-105" onClick={()=>{
+        <Defbutton title="Sell/Lend" className="bg-white text-xs me-0 hover:scale-105" onClick={()=>{
           props.setShowForm(true);
           
         }}/>
+        <Link href="/marketplace/mylistings">
+        <Defbutton title="My Listings" className="bg-white text-xs me-0 hover:scale-105"  />
+        </Link>
       </span>
               </div>
     );
@@ -80,7 +83,7 @@ const Utilbox = (props) => {
           
         }} />
         <Link href="/marketplace/mylistings">
-        <Glowbutton title="My Listings" className="bg-gray-900 text-sm hover:scale-105" onClick={props.onShowListings} />
+        <Glowbutton title="My Listings" className="bg-gray-900 text-sm hover:scale-105"  />
         </Link>
       </span>
     </div>

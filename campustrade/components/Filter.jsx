@@ -24,7 +24,7 @@ const handleCheckboxChange = (label, isChecked) => {
         <button
           id="dropdownDefault"
           onClick={toggleDropdown}
-          className="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center "
+          className="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2.5 max-sm:py-1.5 max-sm:px-2 text-center inline-flex items-center "
           type="button"
         >
           Filter by category

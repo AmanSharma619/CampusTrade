@@ -14,7 +14,7 @@ const Glowbutton = (props) => {
 }
 const Defbutton = (props) => {
   return (
-    <button className={`relative duration-200 inline-flex items-center cursor-pointer justify-center px-5.5 py-3  overflow-hidden text-2xl font-bold   rounded-lg group focus:outline-none ${props.className} `} onClick={props.onClick}>
+    <button className={ ` ${props.className}relative duration-200 inline-flex items-center cursor-pointer justify-center px-5.5 py-3  overflow-hidden text-2xl font-bold   rounded-lg group focus:outline-none  `} onClick={props.onClick}>
 {props.title} 
 </button>
   )

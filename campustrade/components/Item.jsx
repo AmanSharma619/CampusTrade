@@ -33,14 +33,14 @@ const Item = (props) => {
   if (showDetails) {
     return (
       <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#181c24]/70 backdrop-blur-sm">
-        <div className="bg-white rounded-xl shadow-lg p-6 w-[90%] max-w-md relative text-black">
+        <div className="bg-white rounded-xl shadow-lg p-6 w-[90%] max-w-md relative text-black max-sm:p-4">
           <button
             className="absolute top-2 right-2 text-sm bg-red-500 text-white px-2 py-1 rounded"
             onClick={() => setShowDetails(false)}
           >
             Close
           </button>
-          <div className='relative w-full max-sm:w-[90%] h-48 rounded-xl mb-4'>
+          <div className='relative w-[80%] max-sm:w-[90%] h-48 rounded-xl mb-4 mx-auto'>
             <Image src={props.image} alt="image" fill style={{ objectFit: 'contain', width: '100%' }} />
           </div>
           <div className='flex items-center gap-2 mb-2'>
