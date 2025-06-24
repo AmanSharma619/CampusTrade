@@ -13,9 +13,11 @@ const Marketplace = () => {
   const [showRequestForm, setShowRequestForm] = useState(false)
 
   const [data, setData] = useState([])
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function getData() {
+      setLoading(true);
       let res = await fetch("/api/items", {
         method: "GET",
         headers: {
@@ -25,8 +27,7 @@ const Marketplace = () => {
       })
       const resdata = await res.json()
       setData(resdata)
-
-
+      setLoading(false);
     }
 
     getData()
@@ -54,7 +55,6 @@ const Marketplace = () => {
     <>
 
 
-
       <FilterContext.Provider value={{ params, setParams }}>
         <div className='flex flex-col  linear mark min-h-screen bg-gradient-to-br from-purple-900 via-black to-indigo-900'>
 
@@ -66,31 +66,30 @@ const Marketplace = () => {
               <RequestForm setShowRequestForm={setShowRequestForm} />
             )
           }
-
           <Utilbox setShowForm={setShowForm} setShowRequestForm={setShowRequestForm} />
-
-          <div className='lower bg-transparent h-full w-full flex  max-sm:justify-between p-3 gap-7 flex-wrap'>
-
-            {
-              data.map((item) => {
+          {loading ? (
+            <div className="flex flex-col items-center justify-center w-full h-[40vh]">
+              <svg className="animate-spin h-12 w-12 text-purple-500 mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+              </svg>
+              <span className="text-white text-lg font-semibold">Loading items...</span>
+            </div>
+          ) : (
+            <div className='lower bg-transparent h-full w-full flex  max-sm:justify-between p-3 gap-7 flex-wrap'>
+              {data.filter(item => params.indexOf(item.action) !== -1).map(item => {
                 const formattedDate = new Date(item.createdAt).toLocaleString('en-US', {
                   year: 'numeric',
                   month: 'long',
                   day: 'numeric',
                 });
-                if (params.indexOf(item.action) != -1) {
-                  return (
-                    <Item key={item._id} title={item.item} name={item.name} section={item.section} action={item.action} description={item.description} image={item.image} date={formattedDate} />
-                  )
-                }
-              }
-
-              )
-            }
-            {
-              !data && <div> No data found at the moment</div>
-            }
-          </div>
+                return (
+                  <Item key={item._id} title={item.item} name={item.name} section={item.section} action={item.action} description={item.description} image={item.image} date={formattedDate} />
+                );
+              })}
+              {data.length === 0 && <div className="text-white">No data found at the moment</div>}
+            </div>
+          )}
         </div>
       </FilterContext.Provider>
 
