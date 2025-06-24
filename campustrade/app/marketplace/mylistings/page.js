@@ -25,7 +25,7 @@ const MyListings = () => {
   }, [])
 
   return (
-    <div className='flex flex-col linear mark min-h-screen items-center '>
+    <div className='flex flex-col linear listmark min-h-screen items-center '>
       <h2 className='text-4xl font-bold text-white  my-6 mx-auto text-center'>Your Listings</h2>
       <div className='lower bg-transparent h-full w-full flex  max-sm:justify-between p-3 gap-7 flex-wrap'>
         {loading ? (
