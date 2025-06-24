@@ -107,7 +107,7 @@ useEffect(() => {
 
     </div>
     <div className={`min-h-screen bg-white   text-white features flex flex-col justify-around p-3.5 gap-3 `}> 
-      <h1 className='text-7xl mx-auto font-bold tracking-wide mt-7 feature-heading'>Features</h1>
+      <h1 className='text-7xl mx-auto font-bold tracking-wide mt-7 feature-heading max-sm:text-5xl'>Features</h1>
       <div className={` cards mt-6`}>
         <Card/>
       </div>

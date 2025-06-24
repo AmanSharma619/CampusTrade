@@ -10,7 +10,7 @@
         min-width: 70vw;
     }
     .card-title{
-        font: 90px;
+        /* font: 90px; */
     }
    }
 @media(max-width: 390px){

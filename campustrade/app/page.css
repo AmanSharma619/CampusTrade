@@ -62,9 +62,7 @@
     right: 16vw;
     top: 5vh;
   }
-  .features h1{
-    font-size: 45px;
-  }
+ 
  }
  @media (max-width:390px) {
   .main{
@@ -107,9 +105,7 @@
     right: 16vw;
     top: 5vh;
   }
-  .features h1{
-    font-size: 40px;
-  }
+  
  }
  .features{
   --x: calc(var(--posX, 0) * 1px);
