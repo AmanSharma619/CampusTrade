@@ -68,8 +68,8 @@ const Card = () => {
         <div className="flex flex-col items-center gap-6 h-full justify-start text-white">
           <div className="icon text-center card-icon">{item.icon}</div>
           <div className="text flex flex-col gap-3 text-center">
-            <h1 className="text-3xl font-normal card-title">{item.title}</h1>
-            <h2 className="text-lg font-light card-desc">{item.desc}</h2>
+            <h1 className="text-3xl font-normal card-title max-sm:text-xl">{item.title}</h1>
+            <h2 className="text-lg font-light card-desc ">{item.desc}</h2>
           </div>
         </div>
       </div>

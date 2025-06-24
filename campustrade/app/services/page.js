@@ -212,7 +212,7 @@ const Services = () => {
               <h3 className="text-xl font-bold text-purple-800 mb-1">{service.title}</h3>
               <p className="text-gray-700 mb-2">{service.description}</p>
               <span className="text-purple-700 font-semibold mb-2">{service.price}</span>
-              <Defbutton title="Request" className="bg-purple-600 text-sm text-white w-full p-0 hover:bg-purple-700" />
+              <Defbutton title="Request" className="bg-purple-600 text-sm text-white w-full p-0 hover:bg-purple-700" onClick={()=>{setShowRequestForm(true)}} />
             </div>
           ))}
         </div>

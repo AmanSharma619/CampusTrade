@@ -18,8 +18,8 @@ const Navbar = () => {
   const auth = getAuth()
   const user=firebase.user
   const [currUser, setUser] = useState(user)
-  const [name,setName]=useState(null)
-const [isDropdownOpen, setDropdownOpen] = useState(false);
+  const [name,setName] = useState(null)
+  const [isDropdownOpen, setDropdownOpen] = useState(false);
 
   useEffect(() => {
     const auth_state = onAuthStateChanged(auth, (user) => {
@@ -58,17 +58,16 @@ const [isDropdownOpen, setDropdownOpen] = useState(false);
   <div >
     <button
       type="button"
-      className=" inline-flex items-center justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm  font-semibold text-gray-900 shadow-xs ring-1 ring-gray-300 ring-inset hover:bg-gray-50 login"
+      className="inline-flex items-center justify-center gap-x-1.5 rounded-full bg-white w-12 h-12 text-lg font-bold text-gray-900 shadow-xs ring-1 ring-gray-300 ring-inset hover:bg-gray-50 login focus:outline-none focus:ring-2 focus:ring-purple-400"
       onClick={() => setDropdownOpen((prev) => !prev)}
       aria-expanded={isDropdownOpen}
       aria-haspopup="true"
       id="but"
     >
-     <User size={20}/>
-      {name || "user"}
-      <svg className="-mr-1 size-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-        <path fillRule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clipRule="evenodd" />
-      </svg>
+      {/* Show first three letters of name, uppercase, fallback to 'USR' */}
+      <span className="flex items-center justify-center w-full h-full">
+        {name ? name.substring(0, 1).toUpperCase() : "USR"}
+      </span>
     </button>
   </div>
 

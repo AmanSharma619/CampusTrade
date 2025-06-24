@@ -62,6 +62,9 @@
     right: 16vw;
     top: 5vh;
   }
+  .features h1{
+    font-size: 45px;
+  }
  }
  @media (max-width:390px) {
   .main{
@@ -103,6 +106,9 @@
   .calc{
     right: 16vw;
     top: 5vh;
+  }
+  .features h1{
+    font-size: 40px;
   }
  }
  .features{
