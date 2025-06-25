@@ -56,7 +56,7 @@ const Marketplace = () => {
 
 
       <FilterContext.Provider value={{ params, setParams }}>
-        <div className='flex flex-col  linear mark min-h-screen bg-gradient-to-br from-purple-900 via-black to-indigo-900'>
+        <div className='flex flex-col linear mark min-h-screen bg-gradient-to-br from-blue-900 via-black to-indigo-900'>
 
           {showForm && (
             <SellForm setShowForm={setShowForm} />

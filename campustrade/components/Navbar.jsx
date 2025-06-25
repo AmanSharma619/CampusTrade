@@ -74,7 +74,11 @@ const Navbar = () => {
   {isDropdownOpen && (
     <div className="absolute right-0 top-full z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-hidden" role="menu">
       <div className="py-1" role="none" id="drop">
-        <a href="#" className="block px-4 py-2 text-sm text-gray-700" role="menuitem">Account settings</a>
+        <Link href="/user">
+        <p className="block px-4 py-2 text-sm text-gray-700" onClick={() => {
+          setDropdownOpen(false)
+        }}  role="menuitem">Account settings</p>
+        </Link>
         <button onClick={() => {
           setDropdownOpen(false)
           let a =confirm("Are you sure you want to sign out?")

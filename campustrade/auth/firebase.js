@@ -39,14 +39,15 @@ export const FirebaseProvider = (props) => {
   const signinUserWithEmailAndPassword = (email, password) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
-  const addUser=(name,userId,section,year,email,photo)=>{
+  const addUser=(name,userId,section,year,email,photo,joined)=>{
     return set(ref(db, 'users/' + userId), {
     Id:userId,
     Name:name,
     Section:section,
     PassYear: year,
     Email: email,
-    PhotoURL: photo
+    PhotoURL: photo,
+    Joined:joined
   });
   }
   const getUserByUID = async (userId) => {
@@ -59,7 +60,8 @@ export const FirebaseProvider = (props) => {
       Section: data.Section,
       PassYear: data.PassYear,
       Email: data.Email,
-      PhotoURL: data.PhotoURL
+      PhotoURL: data.PhotoURL,
+      Joined: data.Joined
   }
   } else {
     console.log("No data found");

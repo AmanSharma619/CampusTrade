@@ -118,7 +118,7 @@ const Login = () => {
 
       firebase.signupUserWithEmailAndPassword(email, password)
         .then( (e) => {
-          firebase.addUser(name, e.user.uid, section, year, email, "url")
+          firebase.addUser(name, e.user.uid, section, year, email, url || "url", new Date().toLocaleDateString())
           isLoader(false)
           setShowPopover2(true);
           setTimeout(() => setShowPopover2(false), 3500);
@@ -240,7 +240,7 @@ const Login = () => {
             {showPopover2 && <Signout_Popover id="popover2" height={500} width={500} />}
             <h1 className='text-white text-7xl font-bold text-center'>Welcome Back</h1>
             <h2 className='text-2xl  font-normal text-center'>Already have an account? Login now</h2>
-            <Defbutton title="Login" className="bg-white" onClick={toggleToLogin} />
+            <Defbutton title="Login" className="bg-white " onClick={toggleToLogin} />
           </>
         ) : (
           <>
@@ -250,7 +250,7 @@ const Login = () => {
 
             <h1 className='text-white text-7xl font-bold text-center'>New Here?</h1>
             <h2 className='text-2xl text-color2 font-normal text-center'>Sign Up and Discover The Marketplace</h2>
-            <Defbutton title="Sign Up" className="bg-white" onClick={toggleToSignup} />
+            <Defbutton title="Sign Up" className="bg-white " onClick={toggleToSignup} />
           </>
         )}
       </div>
