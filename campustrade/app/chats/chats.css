@@ -1,0 +1,23 @@
+body::-webkit-scrollbar{
+    display: none;
+    width: 0px;
+}
+.chat-list::-webkit-scrollbar{
+    width: 8px;
+    background-color: rgba(128, 128, 128, 0.481);
+}
+.chat-list::-webkit-scrollbar-thumb {
+    background-color: rgb(128, 128, 128);
+    border-radius: 10px;
+    width: 8px;
+    height: 6px;
+}
+.area::-webkit-scrollbar{
+    width: 10px;
+    background-color: rgba(1, 2, 2, 0.085);
+}
+.area::-webkit-scrollbar-thumb {
+    background-color: rgba(7, 114, 44, 0.705);
+    border-radius: 10px;
+   
+}

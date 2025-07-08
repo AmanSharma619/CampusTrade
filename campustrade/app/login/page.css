@@ -6,9 +6,6 @@
         justify-content: normal;
         flex-direction: column;
     }
-    #left{
-        min-height: 100dvh;
-    }
 }
 @media (max-width:400px) {
    #left h1{

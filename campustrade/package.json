@@ -2,6 +2,7 @@
   "name": "campustrade",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -10,12 +11,19 @@
   },
   "dependencies": {
     "cloudinary": "^2.7.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.0.1",
+    "express": "^5.1.0",
     "firebase": "^11.6.1",
+    "lodash": "^4.17.21",
+    "lodash.debounce": "^4.0.8",
     "lucide-react": "^0.488.0",
     "mongoose": "^8.15.2",
     "next": "15.2.4",
+    "nodemon": "^3.1.10",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-loading-skeleton": "^3.5.0",
     "split-type": "^0.3.4",
     "tesseract.js": "^6.0.1"
   },
