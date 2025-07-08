@@ -3,6 +3,10 @@ import cors from "cors";
 import {createServer} from "http"
 import {Server} from "socket.io"
 import chatRoute from "./chatRoute.js"; 
+import dotenv from "dotenv";
+dotenv.config();
+
+const PORT = process.env.PORT || 5000; 
 const app = express();
 const httpServer = createServer(app)
 // Middlewares
@@ -17,7 +21,7 @@ app.get("/", (req, res) => {
 
 const io= new Server(httpServer, {
   cors: {
-    origin: "http://localhost:3000", // Adjust this to your client URL
+    origin: "https://campus-trade-alpha.vercel.app/", 
     methods: ["GET", "POST"],
   },
 });
@@ -41,6 +45,6 @@ io.on("connection",(socket)=>{
   
 })
 // Server
-httpServer.listen(5000, () => {
-  console.log("Server running on http://localhost:5000");
+httpServer.listen(PORT, () => {
+  console.log("Server running");
 });

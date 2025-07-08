@@ -36,7 +36,7 @@ const Chats = () => {
 
 useEffect(() => {
   if (!socketRef.current) {
-    socketRef.current = io("http://localhost:5000");
+    socketRef.current = io("https://campustrade-a780.onrender.com/");
 
     socketRef.current.on("connect", () => {
       console.log("✅ Connected to socket server");
@@ -67,14 +67,14 @@ useEffect(() => {
 
     }
     async function getChatID() {
-      const chatExists = await fetch(`http://localhost:5000/chat/checkchat?senderId=${senderId}&receiverId=${receiverId}`);
+      const chatExists = await fetch(`https://campustrade-a780.onrender.com/chat/checkchat?senderId=${senderId}&receiverId=${receiverId}`);
       const chatData = await chatExists.json();
       setChatID(chatData.chatId);
       return chatData.chatId;
     }
     async function getChat(chatID) {
       setLoadingChats(true);
-      const chat = await fetch(`http://localhost:5000/chat/getchat?chatId=${chatID}`);
+      const chat = await fetch(`https://campustrade-a780.onrender.com/chat/getchat?chatId=${chatID}`);
       const res = await chat.json();
       if (res.error) {
         setLoadingChats(false);
@@ -116,7 +116,7 @@ useEffect(() => {
 
 const createChat = async () => {
   try {
-    const response = await fetch(`http://localhost:5000/chat/newchat`, {
+    const response = await fetch(`https://campustrade-a780.onrender.com/chat/newchat`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -188,7 +188,7 @@ const createChat = async () => {
         userId: firebase.user.uid,
         otherUserId: receiverId,
       });
-      const response = await fetch(`http://localhost:5000/chat/savechat`, {
+      const response = await fetch(`https://campustrade-a780.onrender.com/chat/savechat`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -221,7 +221,7 @@ const createChat = async () => {
 
   async function loadChat(chatID) {
     setLoadingChats(true);
-      const chat = await fetch(`http://localhost:5000/chat/getchat?chatId=${chatID}` );
+      const chat = await fetch(`https://campustrade-a780.onrender.com/chat/getchat?chatId=${chatID}` );
       const res = await chat.json();
       if (res.error) {
         console.error("Error fetching chat:", res.error);

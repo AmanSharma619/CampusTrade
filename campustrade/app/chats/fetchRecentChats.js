@@ -2,7 +2,7 @@ import React from "react";
 
 export async function getRecentChats(userID, firebase) {
   try {
-    const res = await fetch(`http://localhost:5000/chat/recentchats?userId=${userID}`);
+    const res = await fetch(`https://campustrade-a780.onrender.com/chat/recentchats?userId=${userID}`);
     const data = await res.json();
 
     const enrichedChats = await Promise.all(

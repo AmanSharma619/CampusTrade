@@ -47,7 +47,7 @@ const Item = (props) => {
     //   }),
     // })
     // let result=await res.json();
-    const chatExists = await fetch(`http://localhost:5000/chat/checkchat?senderId=${firebase.user.uid}&receiverId=${props.userID}`)
+    const chatExists = await fetch(`https://campustrade-a780.onrender.com//chat/checkchat?senderId=${firebase.user.uid}&receiverId=${props.userID}`)
     const chatData = await chatExists.json();
     if(chatData.exists) {
       router.push(`/chats?senderId=${firebase.user.uid}&receiverId=${props.userID}&exists=true`);
