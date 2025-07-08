@@ -2,10 +2,11 @@
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { UseFirebase } from '@/auth/firebase'
-import { getAuth, onAuthStateChanged, signOut } from "firebase/auth"
+import { getAuth, onAuthStateChanged, signOut ,deleteUser} from "firebase/auth"
 
 const User = () => {
   const firebase = UseFirebase()
+  const userId=firebase.user.uid
   const [name,setName] = useState(null)
   const [section,setSection] = useState(null) 
   const [passYear,setPassYear] = useState(null)
@@ -14,6 +15,7 @@ const User = () => {
   const [photoURL,setPhotoURL] = useState(null)
 
   const auth = getAuth()
+  const currentUser = auth.currentUser;
   useEffect(() => {
     async function getUserData() {
       const data = await firebase.getUserByUID(firebase.user.uid);
@@ -28,11 +30,42 @@ const User = () => {
   
 }, []);
 
+async function handleDelete() {
+  const a = prompt("Are you sure you want to delete your account? Type 'DELETE' to confirm.");
+  if (a === "DELETE") {
+    try {
+      // 1. Delete from your database
+      let deleteUserData = await fetch(`/api/deleteuser?userID=${firebase.user.uid}`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      // 2. Delete from Firebase Auth
+      if (deleteUserData.ok) {
+        const user = auth.currentUser;
+        await firebase.deleteUserByUID(firebase.user.uid);
+        await deleteUser(user);
+
+        alert("Account deleted successfully.");
+        localStorage.removeItem("userData");
+        window.location.href = "/";
+      } else {
+        alert("Failed to delete account data. Please try again later.");
+      }
+    } catch (error) {
+      alert("Error deleting account: " + error.message);
+    }
+  } else {
+    alert("Account deletion cancelled.");
+  }
+}
+
+
   return (
     <div className='min-w-screen min-h-screen bg-gradient-to-br from-yellow-500 via-black to-orange-900 flex flex-col items-center py-10'>
       <div className="bg-white/90 rounded-2xl shadow-2xl p-8 flex flex-col items-center w-[35%] max-sm:w-[75%] max-w-full">
         <div className="relative mb-4">
-          <Image src={ photoURL} alt="User Avatar" width={200} height={200} className="rounded-full border-4 border-purple-400 shadow-lg object-cover object-center" />
+          <Image src={photoURL && photoURL.trim() !== "" && photoURL !== "url" ? photoURL : "/user.jpg"} alt="User Avatar" width={200} height={200} className="rounded-full border-4 border-purple-400 shadow-lg object-cover object-center" />
         </div>
         <h1 className='text-3xl font-bold text-purple-700 mb-1 text-center max-sm:text-2xl'>{name || "Name"}</h1>
         <p className='text-gray-700 mb-2'>{email || "Email"}</p>
@@ -58,7 +91,7 @@ const User = () => {
              signOut(auth)
           }
         }}>Log Out</button>
-        <button className="bg-gray-800 text-white px-6 py-2 rounded-lg font-semibold cursor-pointer shadow hover:bg-gray-900 hover:scale-105 transition">Delete Account</button>
+        <button className="bg-gray-800 text-white px-6 py-2 rounded-lg font-semibold cursor-pointer shadow hover:bg-gray-900 hover:scale-105 transition" onClick={handleDelete}>Delete Account</button>
       </div>
     </div>
   )
