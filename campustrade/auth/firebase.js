@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import { createContext, useContext, useEffect, useState } from "react";
-import {getDatabase,ref,set,child,get} from "firebase/database"
+import {getDatabase,ref,set,child,get,remove} from "firebase/database"
 
 const firebaseContext = createContext(null);
 const firebaseConfig = {
@@ -67,8 +67,17 @@ export const FirebaseProvider = (props) => {
     console.log("No data found");
   }
 };
+const deleteUserByUID = async (uid) => {
+  try {
+    await remove(ref(db, `users/${uid}`));
+    console.log(`User data for UID ${uid} deleted from Realtime DB.`);
+  } catch (error) {
+    console.error("Error deleting user data:", error);
+  }
+};
+
   return (
-    <firebaseContext.Provider value={{ signupUserWithEmailAndPassword, signinUserWithEmailAndPassword,addUser,user,getUserByUID ,loading}}>
+    <firebaseContext.Provider value={{ signupUserWithEmailAndPassword,deleteUserByUID ,signinUserWithEmailAndPassword,addUser,user,getUserByUID ,loading}}>
       {props.children}
     </firebaseContext.Provider>
   );
