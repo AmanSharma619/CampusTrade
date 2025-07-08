@@ -7,6 +7,7 @@ import { Poppins } from 'next/font/google'
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth"
 import { UseFirebase } from "@/auth/firebase"
 import Link from "next/link"
+import Sidebar from "@/components/Sidebar"
 const font_inter = Poppins({
   variable: "--inter",
   weight: ['300', '400', '700'],
@@ -20,6 +21,8 @@ const Navbar = () => {
   const [currUser, setUser] = useState(user)
   const [name,setName] = useState(null)
   const [isDropdownOpen, setDropdownOpen] = useState(false);
+
+  const [displaySidebar, setShowSidebar] = useState(false);
 
   useEffect(() => {
     const auth_state = onAuthStateChanged(auth, (user) => {
@@ -39,9 +42,15 @@ const Navbar = () => {
     return () => auth_state();
   }, []);
 
+  function showSidebar() {
+    setShowSidebar(prev => !prev);
+    
+  }
+
   if (currUser) {
     return (
       <>
+      
         <nav className={` ${font_inter.className}  bg-black sticky z-20 top-0 start-0 border-b-2 border-gray-700 dark:border-gray-600`}>
           <div className="max-w-screen-xl flex items-center justify-between mx-auto p-4 ">
             <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
@@ -84,6 +93,7 @@ const Navbar = () => {
           let a =confirm("Are you sure you want to sign out?")
           if(a==1){
             signOut(auth)
+            window.location.href = "/"
           }
         }} className="block w-full px-4 py-2 text-left text-sm text-red-500 cursor-pointer" role="menuitem">Sign out</button>
       </div>
@@ -91,7 +101,7 @@ const Navbar = () => {
   )}
 </div>
 
-              <button data-collapse-toggle="navbar-sticky" type="button" className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-sticky" aria-expanded="false">
+              <button data-collapse-toggle="navbar-sticky" type="button" className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-sticky" aria-expanded="false" onClick={showSidebar}>
                 <span className="sr-only">Open main menu</span>
                 <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
                   <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1h15M1 7h15M1 13h15" />
@@ -117,6 +127,7 @@ const Navbar = () => {
             </div>
           </div>
         </nav>
+        {displaySidebar && <Sidebar isOpen={displaySidebar} onClose={() => setShowSidebar(false)} />}
       </>
 
     )
@@ -138,7 +149,7 @@ const Navbar = () => {
             <Link href={"/login"}>
               <button type="button" className="text-white bg-color2 hover:bg-color1 duration-200 cursor-pointer focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-md px-4 py-2 text-center login ">Login/Sign Up</button>
             </Link>
-            <button data-collapse-toggle="navbar-sticky" type="button" className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-sticky" aria-expanded="false">
+            <button data-collapse-toggle="navbar-sticky" type="button" className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-sticky" aria-expanded="false" onClick={showSidebar}>
               <span className="sr-only">Open main menu</span>
               <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1h15M1 7h15M1 13h15" />
@@ -164,6 +175,7 @@ const Navbar = () => {
           </div>
         </div>
       </nav>
+         {displaySidebar && <Sidebar isOpen={displaySidebar} onClose={() => setShowSidebar(false)} />}
     </>
 
   )

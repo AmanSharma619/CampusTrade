@@ -8,6 +8,7 @@ import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import { ArrowLeft } from 'lucide-react';
 import debounce from "lodash.debounce";
+import { io } from "socket.io-client";
 
 const Chats = () => {
   const [recieverName, setReceiverName] = useState(null)
@@ -17,20 +18,48 @@ const Chats = () => {
   const inputref = useRef(null);
   const [ReceiverId, setReceiverId] = useState(null);
   const [Recentchats, setRecentChats] = useState([]);
-
-   const searchParams = useSearchParams();
+  
+  const searchParams = useSearchParams();
   const firebase = UseFirebase();
   const senderId = searchParams.get('senderId');
   const receiverId = searchParams.get('receiverId');
   const exists = searchParams.get('exists')
+  const [isLoading, setIsLoading] = useState(true);
 
   const [showChatforSmallScreen, setChatForSmallScreen] = useState(false);
   const [loadingChats, setLoadingChats] = useState(true);
-
-
+  
+  
   const [chatExists, setChatExists] = useState(exists==="true" ? true : false);
+  
+  const socketRef = useRef(null);
 
+useEffect(() => {
+  if (!socketRef.current) {
+    socketRef.current = io("http://localhost:5000");
 
+    socketRef.current.on("connect", () => {
+      console.log("✅ Connected to socket server");
+    });
+
+    socketRef.current.on("disconnect", () => {
+      console.log("❌ Disconnected from socket server");
+    });
+    socketRef.current.on("receiveMessage", (data) => {
+      console.log("📩 New message received via socket:", data);
+      document.getElementById("message").scrollIntoView({ behavior: "smooth" });
+      // ✅ Add the message to chat state
+       setChats(prev => [...prev, { id: data.chatId, content: data.content, sender: data.senderId, timestamp: new Date() }]);
+    });
+  }
+
+  return () => {
+    // Clean up on unmount
+    socketRef.current?.disconnect();
+    socketRef.current = null;
+  };
+}, []);
+  
   useEffect(() => {
     async function getReceiverName() {
       const data = await firebase.getUserByUID(receiverId);
@@ -75,6 +104,7 @@ useEffect(() => {
   if (firebase.user && firebase.user.uid) {
     getRecentChats(firebase.user.uid, firebase)
       .then((data) => {
+         setIsLoading(false);
         setRecentChats(data);
       })
       .catch((error) => {
@@ -122,6 +152,7 @@ const createChat = async () => {
         timestamp: new Date()
       }
     ]);
+    return data.chatId; // Return the new chatId for further use
   } catch (err) {
     console.error("Network error during createChat:", err);
   }
@@ -133,10 +164,30 @@ const createChat = async () => {
  
     
     if(!chatExists) {
-      createChat()
+      const id=await createChat()
+      if(!id) {
+        console.error("Failed to create chat");
+        return;
+      }
+       socketRef.current.emit("joinChat", {
+        chatId: id,
+        userId: firebase.user.uid,
+        otherUserId: receiverId,
+      });
+      socketRef.current.emit("sendMessage", {
+        CHATID,
+        senderId: firebase.user.uid,
+        content: message,
+        timestamp: new Date(),
+      });
       return 
     }
     try {
+      socketRef.current.emit("joinChat", {
+        chatId: CHATID,
+        userId: firebase.user.uid,
+        otherUserId: receiverId,
+      });
       const response = await fetch(`http://localhost:5000/chat/savechat`, {
         method: 'POST',
         headers: {
@@ -149,9 +200,16 @@ const createChat = async () => {
         })
       });
       const data = await response.json();
+
+       socketRef.current.emit("sendMessage", {
+        chatId: CHATID,
+        senderId: firebase.user.uid,
+        content: message,
+        timestamp: new Date(),
+      });
       inputref.current.value = ""; 
       if (response.ok) {
-        setChats(prev => [...prev, { id: data.messageId, content: message, sender: firebase.user.uid, timestamp: new Date() }]);
+        // setChats(prev => [...prev, { id: data.messageId, content: message, sender: firebase.user.uid, timestamp: new Date() }]);
         setMessage("");
       } else {
         console.error("Error sending message:", data.error);
@@ -179,6 +237,10 @@ const createChat = async () => {
     setReceiverName(null);
     setChats([]);
     setMessage("");
+    socketRef.current.emit("joinChat", {
+      chatId: e.currentTarget.getAttribute('data-chat-id'),
+      userId: firebase.user.uid,
+    })
     const chatId = e.currentTarget.getAttribute('data-chat-id');
     const otherUserName = e.currentTarget.getAttribute('data-other-user-name');
     const rec = e.currentTarget.getAttribute('data-receiver-id');
@@ -231,8 +293,8 @@ const createChat = async () => {
       <div className={`chat-list overflow-hidden w-1/3 min-w-[260px] max-w-xs max-sm:min-w-full bg-black backdrop-blur-md border-r border-gray-700 flex flex-col ${recieverName ? " max-sm:hidden" : ""} overflow-y-scroll`}>
         <h2 className="text-2xl p-4 max-h-16 font-bold text-green-700 max-sm:text-center  border-b border-gray-700 bg-black">Chats</h2>
         <div className="flex-1 overflow-y-auto">
-          {Recentchats.length === 0 ? (
-  
+          {isLoading ? (
+  // 🔄 Skeleton Loader when loading
   <div className="p-4 space-y-3">
     {[...Array(5)].map((_, index) => (
       <div key={index} className="flex items-center gap-3 mb-4">
@@ -245,10 +307,16 @@ const createChat = async () => {
       </div>
     ))}
   </div>
-) : 
-  
-  (renderedRecentChats)
-}
+) : Recentchats.length === 0 ? (
+  // 🚫 No recent chats found
+  <div className="text-gray-400 text-sm text-center p-4">
+    No recent chats found.
+  </div>
+) : (
+  // ✅ Render recent chats
+  renderedRecentChats
+)}
+
 
         </div>
       </div>
@@ -305,6 +373,7 @@ const createChat = async () => {
             ? 'self-end bg-green-500 text-white'
             : 'self-start bg-white/80 text-green-900 border border-green-200'
         }`}
+        id="message"
       >
         {msg.content}
         <div className="text-xs text-right mt-1 opacity-60">
