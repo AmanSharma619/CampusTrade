@@ -6,6 +6,10 @@ import SellForm from '@/components/SellForm'
 import RequestForm from '@/components/RequestForm'
 import Utilbox from '@/components/Utilbox'
 import Script from 'next/script'
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
+
+
 export const FilterContext = createContext()
 const Marketplace = () => {
   const [params, setParams] = useState(["Requested", "Selling", "Lending"])
@@ -67,15 +71,21 @@ const Marketplace = () => {
             )
           }
           <Utilbox setShowForm={setShowForm} setShowRequestForm={setShowRequestForm} />
-          {loading ? (
-            <div className="flex flex-col items-center justify-center w-full h-[40vh]">
-              <svg className="animate-spin h-12 w-12 text-purple-500 mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
-              </svg>
-              <span className="text-white text-lg font-semibold">Loading items...</span>
-            </div>
-          ) : (
+          {loading ?  (
+  <div className="lower bg-transparent h-full w-full flex max-sm:justify-between p-3 gap-7 flex-wrap">
+    {[...Array(6)].map((_, i) => (
+      <div key={i} className="w-[280px] h-[220px] p-4 bg-white/5 border border-white/10 rounded-xl shadow-md backdrop-blur-md space-y-3">
+        <Skeleton height={20} width="80%" baseColor="#1f2937" highlightColor="#374151" />
+        <Skeleton height={15} width="60%" baseColor="#1f2937" highlightColor="#374151" />
+        <Skeleton height={10} width="90%" baseColor="#1f2937" highlightColor="#374151" />
+        <Skeleton height={10} width="75%" baseColor="#1f2937" highlightColor="#374151" />
+      
+          <Skeleton height={30} width={70} baseColor="#1f2937" highlightColor="#374151" />
+          <Skeleton height={30} width={70} baseColor="#1f2937" highlightColor="#374151" />
+      </div>
+    ))}
+  </div>
+) : (
             <div className='lower bg-transparent h-full w-full flex  max-sm:justify-between p-3 gap-7 flex-wrap'>
               {data.filter(item => params.indexOf(item.action) !== -1).map(item => {
                 const formattedDate = new Date(item.createdAt).toLocaleString('en-US', {
@@ -84,7 +94,7 @@ const Marketplace = () => {
                   day: 'numeric',
                 });
                 return (
-                  <Item key={item._id} title={item.item} name={item.name} section={item.section} action={item.action} description={item.description} image={item.image} date={formattedDate} />
+                  <Item key={item._id} userID={item.userID} title={item.item} name={item.name} section={item.section} action={item.action} description={item.description} image={item.image} date={formattedDate} />
                 );
               })}
               {data.length === 0 && <div className="text-white">No data found at the moment</div>}
