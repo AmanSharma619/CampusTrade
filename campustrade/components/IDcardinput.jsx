@@ -59,7 +59,7 @@ export const IDcardinput = (props) => {
         
   return (
     <div className='flex gap-4'>
-    <input type="file" className='bg-color2 w-4/5 h-10 rounded-2xl cursor-pointer text-white p-1.5' accept='image/*,.pdf'onChange={filehandler}/>
+    <input type="file" className='bg-black/50 w-4/5 h-10 rounded-2xl cursor-pointer text-white p-1.5' accept='image/*,.pdf'onChange={filehandler}/>
     {loader ? (
         <Image src={"/loader.svg"} height={40} width={40} alt='loader'/>
     )
@@ -69,7 +69,7 @@ export const IDcardinput = (props) => {
         <h2 className='text-green-500 text-center content-center'>Verified</h2>
     )
     : (
-         <button className='cursor-pointer text-black bg-white rounded-lg p-1 max-sm:p-0.5' onClick={handleverify}>Verify</button>
+         <button className='cursor-pointer text-black bg-white rounded-lg p-1 max-sm:p-1' onClick={handleverify}>Verify</button>
     )
    
 )

@@ -73,17 +73,17 @@ const Utilbox = (props) => {
       </div>
       <Filter />
       <span>
-        <Glowbutton title="Request" className="bg-gray-900 text-sm hover:scale-105 " onClick={()=>{
+        <Glowbutton title="Request" className="bg-gray-900 text-sm  " onClick={()=>{
           props.setShowRequestForm(true);
           
         }}/>
-        <Glowbutton title="Sell/Lend" className="bg-gray-900 text-sm hover:scale-105" onClick={()=>{
+        <Glowbutton title="Sell/Lend" className="bg-gray-900 text-sm " onClick={()=>{
           console.log("clicked");
           props.setShowForm(true);
           
         }} />
         <Link href="/marketplace/mylistings">
-        <Glowbutton title="My Listings" className="bg-gray-900 text-sm hover:scale-105"  />
+        <Glowbutton title="My Listings" className="bg-gray-900 text-sm "  />
         </Link>
       </span>
     </div>

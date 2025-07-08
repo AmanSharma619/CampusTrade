@@ -110,7 +110,7 @@ const Navbar = () => {
                   <Link href="/services" className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent  dark:text-white dark:hover:bg-gray-700 dark:hover:text-foreground  md:dark:hover:bg-transparent dark:border-gray-700 focus:text-foreground">Services</Link>
                 </li>
                 <li>
-                  <Link href="" className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent  dark:text-white dark:hover:bg-gray-700 dark:hover:text-foreground  md:dark:hover:bg-transparent dark:border-gray-700 focus:text-foreground">My Chats</Link>
+                  <Link href="/chats?exists=false" className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent  dark:text-white dark:hover:bg-gray-700 dark:hover:text-foreground  md:dark:hover:bg-transparent dark:border-gray-700 focus:text-foreground">My Chats</Link>
                 </li>
 
               </ul>
@@ -157,7 +157,7 @@ const Navbar = () => {
                   <Link href="/services" className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent  dark:text-white dark:hover:bg-gray-700 dark:hover:text-foreground  md:dark:hover:bg-transparent dark:border-gray-700">Services</Link>
                 </li>
               <li>
-                <Link href="" className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent  dark:text-white dark:hover:bg-gray-700 dark:hover:text-foreground  md:dark:hover:bg-transparent dark:border-gray-700">My Chats</Link>
+                <Link href="/chats?exists=false" className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent  dark:text-white dark:hover:bg-gray-700 dark:hover:text-foreground  md:dark:hover:bg-transparent dark:border-gray-700">My Chats</Link>
               </li>
 
             </ul>
