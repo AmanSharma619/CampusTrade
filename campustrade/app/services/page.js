@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Defbutton } from '@/components/Button'
 import { UseFirebase } from '@/auth/firebase'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 const dummyServices = [
   {
@@ -47,10 +48,25 @@ const dummyRequests = [
     maxAmount: '₹180',
     date: 'June 21, 2025',
   },
+  {
+    id: 4,
+    name: 'Palak Bansal',
+    description: 'Need lab file writing for Chemistry, urgent!',
+    maxAmount: '₹180',
+    date: 'June 21, 2025',
+  },
+  {
+    id: 5,
+    name: 'Palak Bansal',
+    description: 'Need lab file writing for Chemistry, urgent!',
+    maxAmount: '₹180',
+    date: 'June 21, 2025',
+  },
 ]
 
 const Services = () => {
   let firebase=UseFirebase()
+  const router = useRouter();
   
   const [services, setServices] = useState([]);
   const [showRequestForm, setShowRequestForm] = useState(false);
@@ -73,6 +89,7 @@ const Services = () => {
         }
         const data = await response.json();
         setServices(data);
+        
       } catch (error) {
         console.error('Error fetching services:', error);
         return [];
@@ -117,6 +134,16 @@ const Services = () => {
     }, 2000);
   };
 
+  async function handleChat(userID) {
+    const chatExists = await fetch(`http://localhost:5000/chat/checkchat?senderId=${firebase.user.uid}&receiverId=${userID}`)
+    const chatData = await chatExists.json();
+    if(chatData.exists) {
+      router.push(`/chats?senderId=${firebase.user.uid}&receiverId=${userID}&exists=true`);
+    }
+    else{
+      router.push(`/chats?senderId=${firebase.user.uid}&receiverId=${userID}&exists=false`);
+    }
+  }
   return (
     <div className='min-w-screen min-h-screen bg-gradient-to-br from-purple-900 via-black to-indigo-900'>
       <div className="service-navbar w-full h-[10vh] -purple-500">
@@ -229,14 +256,18 @@ const Services = () => {
       ) : (
         <div className="flex flex-wrap justify-center gap-8 px-4 mb-10">
           {services.map(req => (
-            <div key={req._id} className="bg-white/90 rounded-xl shadow-lg p-5 w-[320px] max-w-full flex flex-col gap-2 border-2 border-indigo-200 hover:scale-105 transition">
+            <div key={req._id} userid={req.userID} className="bg-white/90 rounded-xl shadow-lg p-5 w-[320px] max-w-full flex flex-col gap-2 border-2 border-indigo-200 hover:scale-105 transition" >
               <div className="flex items-center justify-between mb-2">
                 <span className="text-purple-700 font-bold text-base">{req.name}</span>
                 <span className="text-xs text-gray-500">{req.date}</span>
               </div>
               <p className="text-gray-800 mb-2">{req.description}</p>
               <span className="text-indigo-700 font-semibold mb-2">Max: {req.maxAmount}</span>
-              <Defbutton title="Offer Help" className="bg-indigo-600 text-sm text-white w-full p-0 hover:bg-indigo-700" />
+              {firebase.user.uid ===req.userID ? (
+                <Defbutton title="Your Request" className="bg-gray-300 text-sm text-gray-700 w-full p-0 cursor-not-allowed" disabled />)
+              :  <Defbutton title="Offer Help" className="bg-indigo-600 text-sm text-white w-full p-0 hover:bg-indigo-700" onClick={()=>{handleChat(req.userID)}}/>
+              }
+             
             </div>
           ))}
         </div>
