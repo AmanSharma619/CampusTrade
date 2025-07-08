@@ -9,6 +9,7 @@ cloudinary.config({
   api_key: process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY,
   api_secret: process.env.NEXT_PUBLIC_CLOUDINARY_API_SECRET,
 });
+
 export async function GET(request) {
     await ConnectDB();
     try {
