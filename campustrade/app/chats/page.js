@@ -47,7 +47,6 @@ useEffect(() => {
     });
     socketRef.current.on("receiveMessage", (data) => {
       console.log("📩 New message received via socket:", data);
-      document.getElementById("message").scrollIntoView({ behavior: "smooth" });
       // ✅ Add the message to chat state
        setChats(prev => [...prev, { id: data.chatId, content: data.content, sender: data.senderId, timestamp: new Date() }]);
     });
