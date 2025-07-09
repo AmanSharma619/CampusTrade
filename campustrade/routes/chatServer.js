@@ -9,8 +9,19 @@ dotenv.config();
 const PORT = process.env.PORT || 5000; 
 const app = express();
 const httpServer = createServer(app)
+
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://campus-trade-alpha.vercel.app",
+];
 // Middlewares
-app.use(cors());
+app.use(
+  cors({
+    origin: allowedOrigins,
+    methods: ["GET", "POST"],
+    credentials: true,
+  })
+);
 app.use(express.json()); // 👈 Needed to parse JSON bodies
 
 // Routes
@@ -21,7 +32,7 @@ app.get("/", (req, res) => {
 
 const io= new Server(httpServer, {
   cors: {
-    origin: "https://campus-trade-alpha.vercel.app/", 
+    origin: allowedOrigins, 
     methods: ["GET", "POST"],
   },
 });
