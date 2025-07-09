@@ -56,8 +56,8 @@ const Utilbox = (props) => {
 
   return (
     <div className='flex items-center w-full min-h-[10vh] bg-transparent relative justify-around util'>
-      <div className="w-[30%]">
-        <div className="relative">
+      <div className="w-[30%] flex gap-2 items-center">
+        <div className="relative flex-1">
           <input
             className="w-full focus:bg-gray-800 bg-transparent placeholder:text-slate-400 text-white text-sm border border-slate-200 rounded-md pl-3 pr-28 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow"
             placeholder="Calculator..."
@@ -69,6 +69,19 @@ const Utilbox = (props) => {
             <Search />
             Search
           </button>
+        </div>
+        {/* Sort By Dropdown */}
+        <div className="relative">
+          <select
+            className="bg-gray-900 text-white text-sm rounded-md px-3 py-2 border border-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-400 shadow-sm"
+            defaultValue="newest"
+            onChange={e => {
+              if (props.onSortChange) props.onSortChange(e.target.value);
+            }}
+          >
+            <option value="newest">Newest First</option>
+            <option value="oldest">Older First</option>
+          </select>
         </div>
       </div>
       <Filter />
