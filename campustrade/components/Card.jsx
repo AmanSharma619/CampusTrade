@@ -32,7 +32,7 @@ const Card = () => {
         {
            icon: <ShieldCheck size={70}/>,
             title: "College Exclusive" ,
-            desc:" Only students with verified university codes can join, ensuring a safe and local trading community."
+            desc:" Only students with verified ID cards can join, ensuring a safe and local trading community."
         },
         {
             icon:<MessageSquareMore size={70}/>,

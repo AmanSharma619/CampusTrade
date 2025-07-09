@@ -309,7 +309,7 @@ const createChat = async () => {
 ) : Recentchats.length === 0 ? (
   // 🚫 No recent chats found
   <div className="text-gray-400 text-sm text-center p-4">
-    No recent chats found.
+    No recent chats found. Please try reloading if there are any issues.
   </div>
 ) : (
   // ✅ Render recent chats

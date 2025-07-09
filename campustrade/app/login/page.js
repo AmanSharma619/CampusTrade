@@ -227,10 +227,10 @@ const Login = () => {
         )}
       </div>
       {/* Right Panel */}
-      <div className='right-div overflow-x-hidden bg-black h-full w-full flex flex-col items-center justify-center relative z-10 gap-4 max-sm:hidden  shadow-2xl' id='right'>
+      <div className='right-div overflow-x-hidden overflow-y-hidden bg-black h-full w-full flex flex-col items-center justify-center relative z-10 gap-4 max-sm:hidden  shadow-2xl' id='right'>
         {/* Contrasting animated shapes */}
-        <div className="absolute -top-24 right-10 w-96 h-96 bg-gradient-to-tr from-lime-500 via-green-600 to-cyan-800 rounded-full blur-2xl opacity-30 animate-pulse z-0"></div>
-        <div className="absolute bottom-6 left-0 w-96 h-96 bg-gradient-to-br from-lime-600 via-green-600 to-cyan-800 rounded-full blur-2xl opacity-20 animate-pulse z-0"></div>
+        <div className="absolute -top-40 -right-20 w-96 h-96 bg-gradient-to-tr from-lime-500 via-green-600 to-cyan-800 rounded-full blur-2xl opacity-30 animate-pulse z-0"></div>
+        <div className="absolute -bottom-20 -left-20 w-96 h-96 bg-gradient-to-br from-lime-600 via-green-600 to-cyan-800 rounded-full blur-2xl opacity-20 animate-pulse z-0"></div>
         {/* Content */}
         {isSignup ? (
           <>

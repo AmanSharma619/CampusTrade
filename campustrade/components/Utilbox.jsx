@@ -70,19 +70,6 @@ const Utilbox = (props) => {
             Search
           </button>
         </div>
-        {/* Sort By Dropdown */}
-        <div className="relative">
-          <select
-            className="bg-gray-900 text-white text-sm rounded-md px-3 py-2 border border-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-400 shadow-sm"
-            defaultValue="newest"
-            onChange={e => {
-              if (props.onSortChange) props.onSortChange(e.target.value);
-            }}
-          >
-            <option value="newest">Newest First</option>
-            <option value="oldest">Older First</option>
-          </select>
-        </div>
       </div>
       <Filter />
       <span>
