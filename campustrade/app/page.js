@@ -53,20 +53,6 @@ useEffect(() => {
     duration: 0.8,
     ease: "power1.out"
   });
-  t.to("#calc",{
-    y:10,
-    duration:1,
-    repeat:-1,
-    yoyo:true,
-   
-  })
-  t.to("#book",{
-    y:19,
-    duration:1,
-    repeat:-1,
-    yoyo:true,
-   
-  })
   gsap.from(".feature-heading",{
     scale:0,
     opacity:0,
